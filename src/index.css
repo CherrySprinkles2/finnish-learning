@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens (revontuli theme) — see docs/theming.md for the source artifact.
+   Static, theme-independent tokens live in :root; colours live in
+   [data-theme="..."] so they can be swapped. The @theme blocks expose both as
+   Tailwind utilities (bg-surface, text-ink, border-line, bg-accent, …).
+--------------------------------------------------------------------------- */
+
+:root {
+  /* ---- Type scale (1.250 major third) ---- */
+  --fs-display: 4.209rem;   /* 67px */
+  --fs-h1: 3.157rem;        /* 51px */
+  --fs-h2: 2.369rem;        /* 38px */
+  --fs-h3: 1.777rem;        /* 28px */
+  --fs-h4: 1.333rem;        /* 21px */
+  --fs-body-lg: 1.125rem;   /* 18px */
+  --fs-body: 1rem;          /* 16px */
+  --fs-sm: 0.875rem;        /* 14px */
+  --fs-xs: 0.75rem;         /* 12px */
+
+  --lh-tight: 1.08;
+  --lh-snug: 1.28;
+  --lh-normal: 1.6;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.08em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---- Spacing (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  /* ---- Radius + elevation live in @theme (below) so they generate utilities ---- */
+}
+
+[data-theme="revontuli"] {
+  --bg-base: #090D14;
+  --bg-inset: #0B0F17;
+  --bg-surface: #0F141D;
+  --bg-elevated: #161D28;
+  --bg-overlay: #1E2632;
+
+  --border-subtle: #1A222E;
+  --border-default: #28323F;
+  --border-strong: #3A4654;
+  --border-focus: #5BD1A0;
+
+  --text-primary: #EAEFF5;
+  --text-secondary: #A4AFBD;
+  --text-tertiary: #687585;
+  --text-disabled: #444F5C;
+  --text-on-accent: #04140E;
+  --text-link: #72DBB0;
+
+  --accent-subtle: #0E211B;
+  --accent-muted: #18352B;
+  --accent-primary: #5BD1A0;
+  --accent-hover: #72DBB0;
+  --accent-pressed: #46BC8C;
+  --accent-emphasis: #8DE6C2;
+
+  --glow-primary: rgba(91, 209, 160, 0.55);
+  --glow-secondary: rgba(110, 139, 216, 0.45);
+  --glow-base: #070A10;
+
+  --success: #4FD08C;  --success-subtle: #102419;
+  --warning: #E0B860;  --warning-subtle: #2A2212;
+  --danger:  #E97B92;  --danger-subtle:  #2C1419;
+  --info:    #66C2DA;  --info-subtle:    #0E2128;
+}
+
+/* ---- Fonts, radius, and type scale → Tailwind utilities ----
+   (font-display, rounded-md, text-h2, … all come from here) */
+@theme {
+  --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+  --font-sans: "Manrope", "Segoe UI", system-ui, sans-serif;
+
+  /* Radius scale */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --radius-full: 999px;
+
+  /* Type scale (text-display / text-h1…h4 / text-body{,-lg}); xs/sm/base/lg
+     already equal the scale so the Tailwind defaults are kept. */
+  --text-display: var(--fs-display);
+  --text-display--line-height: var(--lh-tight);
+  --text-h1: var(--fs-h1);
+  --text-h1--line-height: var(--lh-tight);
+  --text-h2: var(--fs-h2);
+  --text-h2--line-height: var(--lh-snug);
+  --text-h3: var(--fs-h3);
+  --text-h3--line-height: var(--lh-snug);
+  --text-h4: var(--fs-h4);
+  --text-h4--line-height: var(--lh-snug);
+  --text-body-lg: var(--fs-body-lg);
+  --text-body-lg--line-height: var(--lh-normal);
+  --text-body: var(--fs-body);
+  --text-body--line-height: var(--lh-normal);
+
+  /* Elevation tuned for a dark base (deeper than Tailwind's light-mode defaults) */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 8px 24px -8px rgba(0,0,0,0.55);
+  --shadow-lg: 0 24px 64px -16px rgba(0,0,0,0.65);
+  --shadow-xl: 0 32px 96px -24px rgba(0,0,0,0.72);
+}
+
+/* ---- Colour utilities mapped onto the semantic tokens ---- */
+@theme inline {
+  /* Surfaces */
+  --color-base: var(--bg-base);
+  --color-inset: var(--bg-inset);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-overlay: var(--bg-overlay);
+
+  /* Borders → "line" */
+  --color-line-subtle: var(--border-subtle);
+  --color-line: var(--border-default);
+  --color-line-strong: var(--border-strong);
+  --color-focus: var(--border-focus);
+
+  /* Text → "ink" */
+  --color-ink: var(--text-primary);
+  --color-ink-muted: var(--text-secondary);
+  --color-ink-faint: var(--text-tertiary);
+  --color-ink-disabled: var(--text-disabled);
+  --color-on-accent: var(--text-on-accent);
+  --color-link: var(--text-link);
+
+  /* Accent */
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-muted: var(--accent-muted);
+  --color-accent: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-pressed: var(--accent-pressed);
+  --color-accent-emphasis: var(--accent-emphasis);
+
+  /* Status */
+  --color-success: var(--success);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-danger: var(--danger);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-info: var(--info);
+  --color-info-subtle: var(--info-subtle);
+}
+
+/* ---- Base ---- */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
