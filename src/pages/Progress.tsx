@@ -1,16 +1,27 @@
 import { useState, useEffect } from 'react'
 import {
-  BarChart, Bar, LineChart, Line, AreaChart, Area,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  BarChart, Bar, LineChart, Line,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from 'recharts'
 
 interface DailyPoint { day: string; attempts: number; correct: number }
-interface MasteredPoint { day: string; newly_mastered: number }
 interface StrugglingWord {
   id: number; english: string; finnish: string
   recent_attempts: number; recent_correct: number; last_attempted: string
 }
-interface Stats { daily: DailyPoint[]; masteredByDay: MasteredPoint[]; struggling: StrugglingWord[] }
+interface KnownWellWord {
+  id: number; english: string; finnish: string; category: string | null
+  recent_attempts: number; recent_correct: number; last_attempted: string
+}
+interface CategoryAccuracy {
+  category: string; word_count: number; total_attempts: number; correct_attempts: number
+}
+interface Stats {
+  daily: DailyPoint[]
+  struggling: StrugglingWord[]
+  knownWell: KnownWellWord[]
+  categoryAccuracy: CategoryAccuracy[]
+}
 
 function formatDay(dateStr: string) {
   return new Date(dateStr + 'T00:00:00').toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })
@@ -37,6 +48,12 @@ function computeStreak(daily: DailyPoint[]) {
   return streak
 }
 
+function catBarColor(accuracy: number) {
+  if (accuracy >= 75) return 'var(--success)'
+  if (accuracy >= 50) return 'var(--warning)'
+  return 'var(--danger)'
+}
+
 const tooltipStyle = {
   borderRadius: 8,
   border: '1px solid var(--border-default)',
@@ -45,8 +62,62 @@ const tooltipStyle = {
   fontSize: 13,
 }
 const tooltipLabelStyle = { color: 'var(--text-secondary)', fontWeight: 600 }
+const tooltipItemStyle = { color: 'var(--text-primary)' }
 const tickStyle = { fontSize: 11, fill: 'var(--text-tertiary)' }
 const GRID = 'var(--border-subtle)'
+
+function WordTable({ words, variant }: {
+  words: (StrugglingWord | KnownWellWord)[]
+  variant: 'success' | 'danger'
+}) {
+  return (
+    <div className="overflow-x-auto">
+    <table className="w-full text-body">
+      <thead className="bg-base text-ink-muted text-sm uppercase tracking-wider border-b border-line">
+        <tr>
+          <th className="text-left px-5 py-3 font-medium">English</th>
+          <th className="text-left px-5 py-3 font-medium">Finnish</th>
+          <th className="text-left px-5 py-3 font-medium">Recent accuracy</th>
+          <th className="text-left px-5 py-3 font-medium">Last tried</th>
+        </tr>
+      </thead>
+      <tbody className="divide-y divide-line-subtle">
+        {words.map(w => {
+          const pct = Math.round((w.recent_correct / w.recent_attempts) * 100)
+          return (
+            <tr key={w.id} className="hover:bg-base">
+              <td className="px-5 py-3">
+                <div className="flex flex-wrap gap-1">
+                  {w.english.split('/').map((c, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-info-subtle text-info text-sm font-medium rounded-xs">{c.trim()}</span>
+                  ))}
+                </div>
+              </td>
+              <td className="px-5 py-3">
+                <div className="flex flex-wrap gap-1">
+                  {w.finnish.split('/').map((c, i) => (
+                    <span key={i} className="px-2 py-0.5 bg-warning-subtle text-warning text-sm font-medium rounded-xs">{c.trim()}</span>
+                  ))}
+                </div>
+              </td>
+              <td className="px-5 py-3">
+                <span className={`px-2 py-0.5 rounded-xs text-sm font-medium ${
+                  variant === 'success' ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger'
+                }`}>
+                  {pct}% ({w.recent_correct}/{w.recent_attempts})
+                </span>
+              </td>
+              <td className="px-5 py-3 text-ink-muted">
+                {new Date(w.last_attempted + 'Z').toLocaleDateString()}
+              </td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+    </div>
+  )
+}
 
 export default function Progress() {
   const [stats, setStats] = useState<Stats | null>(null)
@@ -57,9 +128,8 @@ export default function Progress() {
 
   if (!stats) return <div className="min-h-screen bg-base p-8 text-ink-faint">Loading…</div>
 
-  const { daily, masteredByDay, struggling } = stats
+  const { daily, struggling, knownWell, categoryAccuracy } = stats
 
-  // Last 30 days filled with zeros for missing days
   const dailyMap = new Map(daily.map(d => [d.day, d]))
   const last30 = getLast30Days().map(day => {
     const d = dailyMap.get(day)
@@ -70,43 +140,30 @@ export default function Progress() {
     }
   })
 
-  // Cumulative mastered — fill every day from first mastery to today
-  let cumMastered = 0
-  const masteredMap = new Map(masteredByDay.map(d => [d.day, d.newly_mastered]))
-  const masteredLine = (() => {
-    if (masteredByDay.length === 0) return []
-    const points: { label: string; cumulative: number }[] = []
-    const start = new Date(masteredByDay[0].day + 'T00:00:00')
-    const end = new Date()
-    for (const d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-      const key = d.toISOString().split('T')[0]
-      cumMastered += masteredMap.get(key) ?? 0
-      points.push({ label: formatDay(key), cumulative: cumMastered })
-    }
-    return points
-  })()
+  const catData = categoryAccuracy.map(c => ({
+    ...c,
+    accuracy: c.total_attempts > 0 ? Math.round(c.correct_attempts / c.total_attempts * 100) : 0,
+  }))
 
-  // Summary stats
   const totalAttempts = daily.reduce((s, d) => s + d.attempts, 0)
   const totalCorrect  = daily.reduce((s, d) => s + d.correct, 0)
   const overallAccuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0
   const streak = computeStreak(daily)
-  const wordsmastered = cumMastered
 
   const statCards = [
     { label: 'Total attempts', value: totalAttempts.toLocaleString() },
     { label: 'Overall accuracy', value: `${overallAccuracy}%` },
-    { label: 'Words mastered', value: wordsmastered.toString() },
+    { label: 'Known well', value: knownWell.length.toString() },
     { label: 'Day streak', value: `${streak}d` },
   ]
 
   return (
-    <div className="min-h-screen bg-base p-8">
+    <div className="min-h-screen bg-base p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-h3 font-display font-bold text-ink mb-8">Progress</h1>
 
         {/* Stat cards */}
-        <div className="grid grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
           {statCards.map(({ label, value }) => (
             <div key={label} className="bg-surface rounded-lg border border-line shadow-sm p-5">
               <div className="text-h3 font-display font-bold text-ink">{value}</div>
@@ -116,9 +173,9 @@ export default function Progress() {
         </div>
 
         {/* Daily activity + accuracy */}
-        <div className="grid grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="bg-surface rounded-lg border border-line shadow-sm p-6">
-            <h2 className="text-base font-semibold text-ink-muted mb-4">Daily activity — last 30 days</h2>
+            <h2 className="text-body font-semibold text-ink-muted mb-4">Daily activity — last 30 days</h2>
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={last30} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke={GRID} />
@@ -127,6 +184,7 @@ export default function Progress() {
                 <Tooltip
                   formatter={(v) => [v, 'attempts']}
                   labelStyle={tooltipLabelStyle}
+                  itemStyle={tooltipItemStyle}
                   contentStyle={tooltipStyle}
                 />
                 <Bar dataKey="attempts" fill="var(--accent-primary)" radius={[3, 3, 0, 0]} />
@@ -135,7 +193,7 @@ export default function Progress() {
           </div>
 
           <div className="bg-surface rounded-lg border border-line shadow-sm p-6">
-            <h2 className="text-base font-semibold text-ink-muted mb-4">Daily accuracy — last 30 days</h2>
+            <h2 className="text-body font-semibold text-ink-muted mb-4">Daily accuracy — last 30 days</h2>
             <ResponsiveContainer width="100%" height={200}>
               <LineChart
                 data={last30.filter(d => d.accuracy !== null)}
@@ -147,6 +205,7 @@ export default function Progress() {
                 <Tooltip
                   formatter={(v) => [`${v}%`, 'accuracy']}
                   labelStyle={tooltipLabelStyle}
+                  itemStyle={tooltipItemStyle}
                   contentStyle={tooltipStyle}
                 />
                 <Line dataKey="accuracy" stroke="var(--info)" strokeWidth={2} dot={{ r: 3, fill: "var(--info)" }} />
@@ -155,86 +214,63 @@ export default function Progress() {
           </div>
         </div>
 
-        {/* Words mastered over time */}
+        {/* Category accuracy */}
         <div className="bg-surface rounded-lg border border-line shadow-sm p-6 mb-6">
-          <h2 className="text-base font-semibold text-ink-muted mb-4">Words mastered over time</h2>
-          {masteredLine.length === 0 ? (
-            <p className="text-ink-faint text-sm py-10 text-center">No mastered words yet — keep practising!</p>
+          <h2 className="text-body font-semibold text-ink-muted mb-1">Accuracy by category</h2>
+          <p className="text-sm text-ink-faint mb-4">Based on last 5 attempts per word</p>
+          {catData.length === 0 ? (
+            <p className="text-ink-faint text-sm py-10 text-center">No attempts yet — start practising!</p>
           ) : (
-            <ResponsiveContainer width="100%" height={200}>
-              <AreaChart data={masteredLine} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
-                <defs>
-                  <linearGradient id="masteredGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--success)" stopOpacity={0.2} />
-                    <stop offset="95%" stopColor="var(--success)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke={GRID} />
-                <XAxis dataKey="label" tick={tickStyle} interval="preserveStartEnd" />
-                <YAxis tick={tickStyle} allowDecimals={false} />
+            <ResponsiveContainer width="100%" height={Math.max(180, catData.length * 44)}>
+              <BarChart layout="vertical" data={catData} margin={{ top: 0, right: 40, left: 0, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke={GRID} horizontal={false} />
+                <XAxis type="number" domain={[0, 100]} unit="%" tick={tickStyle} />
+                <YAxis type="category" dataKey="category" tick={tickStyle} width={120} />
                 <Tooltip
-                  formatter={(v) => [v, 'words mastered']}
+                  formatter={(v, _name, props) => {
+                    const { correct_attempts, total_attempts } = props.payload as CategoryAccuracy & { accuracy: number }
+                    return [`${v}%  (${correct_attempts}/${total_attempts} attempts)`, 'accuracy']
+                  }}
                   labelStyle={tooltipLabelStyle}
+                  itemStyle={tooltipItemStyle}
                   contentStyle={tooltipStyle}
                 />
-                <Area dataKey="cumulative" stroke="var(--success)" strokeWidth={2} fill="url(#masteredGrad)" dot={false} />
-              </AreaChart>
+                <Bar dataKey="accuracy" radius={[0, 3, 3, 0]}>
+                  {catData.map((entry, i) => (
+                    <Cell key={i} fill={catBarColor(entry.accuracy)} />
+                  ))}
+                </Bar>
+              </BarChart>
             </ResponsiveContainer>
+          )}
+        </div>
+
+        {/* Words you know well */}
+        <div className="bg-surface rounded-lg border border-line shadow-sm overflow-hidden mb-6">
+          <div className="px-6 py-4 border-b border-line-subtle">
+            <h2 className="text-body font-semibold text-ink-muted">Words you know well</h2>
+            <p className="text-sm text-ink-faint mt-0.5">≥80% in last 5 attempts, at least 3 attempts, tried in the past 60 days</p>
+          </div>
+          {knownWell.length === 0 ? (
+            <p className="text-ink-faint text-sm py-10 text-center">Nothing here yet — keep practising!</p>
+          ) : (
+            <WordTable words={knownWell} variant="success" />
           )}
         </div>
 
         {/* Struggling words */}
         <div className="bg-surface rounded-lg border border-line shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-line-subtle">
-            <h2 className="text-base font-semibold text-ink-muted">Recently struggling</h2>
+            <h2 className="text-body font-semibold text-ink-muted">Recently struggling</h2>
             <p className="text-sm text-ink-faint mt-0.5">Under 50% in last 5 attempts, tried in the past 30 days</p>
           </div>
           {struggling.length === 0 ? (
             <p className="text-ink-faint text-sm py-10 text-center">Nothing here — you're doing great!</p>
           ) : (
-            <table className="w-full text-base">
-              <thead className="bg-base text-ink-muted text-sm uppercase tracking-wider border-b border-line">
-                <tr>
-                  <th className="text-left px-5 py-3 font-medium">English</th>
-                  <th className="text-left px-5 py-3 font-medium">Finnish</th>
-                  <th className="text-left px-5 py-3 font-medium">Recent accuracy</th>
-                  <th className="text-left px-5 py-3 font-medium">Last tried</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-line-subtle">
-                {struggling.map(w => {
-                  const pct = Math.round((w.recent_correct / w.recent_attempts) * 100)
-                  return (
-                    <tr key={w.id} className="hover:bg-base">
-                      <td className="px-5 py-3">
-                        <div className="flex flex-wrap gap-1">
-                          {w.english.split('/').map((c, i) => (
-                            <span key={i} className="px-2 py-0.5 bg-info-subtle text-info text-sm font-medium rounded-xs">{c.trim()}</span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="px-5 py-3">
-                        <div className="flex flex-wrap gap-1">
-                          {w.finnish.split('/').map((c, i) => (
-                            <span key={i} className="px-2 py-0.5 bg-warning-subtle text-warning text-sm font-medium rounded-xs">{c.trim()}</span>
-                          ))}
-                        </div>
-                      </td>
-                      <td className="px-5 py-3">
-                        <span className="px-2 py-0.5 rounded-xs text-sm font-medium bg-danger-subtle text-danger">
-                          {pct}% ({w.recent_correct}/{w.recent_attempts})
-                        </span>
-                      </td>
-                      <td className="px-5 py-3 text-ink-muted">
-                        {new Date(w.last_attempted + 'Z').toLocaleDateString()}
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+            <WordTable words={struggling} variant="danger" />
           )}
         </div>
+
       </div>
     </div>
   )

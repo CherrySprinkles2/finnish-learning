@@ -118,7 +118,7 @@ export default function Words() {
   }
 
   return (
-    <div className="min-h-screen bg-base p-8">
+    <div className="min-h-screen bg-base p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-h3 font-display font-bold text-ink">Vocabulary</h1>
@@ -147,7 +147,7 @@ export default function Words() {
               value={english}
               onChange={e => setEnglish(e.target.value)}
               placeholder="dog"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-base"
+              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
             />
           </div>
           <div className="flex-1 min-w-[140px]">
@@ -156,7 +156,7 @@ export default function Words() {
               value={finnish}
               onChange={e => setFinnish(e.target.value)}
               placeholder="koira"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-base"
+              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
             />
           </div>
           <div className="flex-1 min-w-[140px]">
@@ -166,7 +166,7 @@ export default function Words() {
               onChange={e => setCategory(e.target.value)}
               placeholder="Eläimet (optional)"
               list="category-list"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-base"
+              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
             />
           </div>
           <button
@@ -213,7 +213,7 @@ export default function Words() {
 
                   {isOpen && (
                     <div className="border-t border-line-subtle overflow-x-auto">
-                      <table className="w-full text-base">
+                      <table className="w-full text-body">
                         <thead className="bg-base text-ink-muted text-sm uppercase tracking-wider border-b border-line">
                           <tr>
                             <th className="text-left px-5 py-2.5 font-medium">English</th>

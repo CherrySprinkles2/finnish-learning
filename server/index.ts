@@ -173,32 +173,7 @@ app.get('/api/stats', (_req, res) => {
     ORDER BY day
   `).all()
 
-  // First day each word crossed ≥80% accuracy with ≥3 cumulative attempts
-  const masteredByDay = db.prepare(`
-    WITH daily_agg AS (
-      SELECT word_id, date(attempted_at) as day, SUM(correct) as correct, COUNT(*) as total
-      FROM attempts
-      GROUP BY word_id, date(attempted_at)
-    ),
-    cumulative AS (
-      SELECT word_id, day,
-        SUM(correct) OVER (PARTITION BY word_id ORDER BY day) as cum_correct,
-        SUM(total)   OVER (PARTITION BY word_id ORDER BY day) as cum_total
-      FROM daily_agg
-    ),
-    first_mastered AS (
-      SELECT word_id, MIN(day) as mastered_on
-      FROM cumulative
-      WHERE cum_total >= 2 AND CAST(cum_correct AS REAL) / cum_total >= 0.8
-      GROUP BY word_id
-    )
-    SELECT mastered_on as day, COUNT(*) as newly_mastered
-    FROM first_mastered
-    GROUP BY mastered_on
-    ORDER BY mastered_on
-  `).all()
-
-  // Words with <50% accuracy in their last 5 attempts, tried within 14 days
+  // Words with <50% accuracy in their last 5 attempts, tried within 30 days
   const struggling = db.prepare(`
     WITH recent AS (
       SELECT *, ROW_NUMBER() OVER (PARTITION BY word_id ORDER BY attempted_at DESC) as rn
@@ -219,7 +194,44 @@ app.get('/api/stats', (_req, res) => {
     LIMIT 20
   `).all()
 
-  res.json({ daily, masteredByDay, struggling })
+  // Words with ≥80% accuracy in last 5 attempts, ≥3 attempts, tried within 60 days
+  const knownWell = db.prepare(`
+    WITH recent AS (
+      SELECT *, ROW_NUMBER() OVER (PARTITION BY word_id ORDER BY attempted_at DESC) as rn
+      FROM attempts
+    )
+    SELECT
+      w.id, w.english, w.finnish, w.category,
+      COUNT(*) as recent_attempts,
+      SUM(r.correct) as recent_correct,
+      MAX(r.attempted_at) as last_attempted
+    FROM words w
+    JOIN recent r ON r.word_id = w.id AND r.rn <= 5
+    GROUP BY w.id
+    HAVING recent_attempts >= 3
+      AND CAST(recent_correct AS REAL) / recent_attempts >= 0.8
+      AND MAX(r.attempted_at) >= datetime('now', '-60 days')
+    ORDER BY CAST(recent_correct AS REAL) / recent_attempts DESC, last_attempted DESC
+  `).all()
+
+  // Per-category accuracy based on last 5 attempts per word, weakest first
+  const categoryAccuracy = db.prepare(`
+    WITH recent AS (
+      SELECT *, ROW_NUMBER() OVER (PARTITION BY word_id ORDER BY attempted_at DESC) as rn
+      FROM attempts
+    )
+    SELECT
+      COALESCE(w.category, 'Uncategorised') as category,
+      COUNT(DISTINCT w.id) as word_count,
+      COUNT(r.id) as total_attempts,
+      SUM(r.correct) as correct_attempts
+    FROM words w
+    JOIN recent r ON r.word_id = w.id AND r.rn <= 5
+    GROUP BY w.category
+    ORDER BY CAST(SUM(r.correct) AS REAL) / COUNT(r.id) ASC
+  `).all()
+
+  res.json({ daily, struggling, knownWell, categoryAccuracy })
 })
 
 app.post('/api/attempts', (req, res) => {

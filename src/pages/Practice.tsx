@@ -146,17 +146,17 @@ export default function Practice() {
   const answerChips = correctAnswer.split('/').map(s => s.trim()).filter(Boolean)
 
   return (
-    <div className="min-h-screen bg-base flex flex-col items-center justify-center p-8">
+    <div className="min-h-screen bg-base flex flex-col items-center justify-center p-4 sm:p-8">
       <div className="w-full max-w-3xl">
 
         {/* Direction + category */}
-        <div className="flex items-center justify-between gap-3 mb-10">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-6 sm:mb-10">
           <div className="flex items-center gap-3">
             <span className="px-3 py-1 bg-accent-muted text-accent text-sm font-semibold rounded-full">{promptLang}</span>
             <span className="text-ink-faint text-lg">→</span>
             <span className="px-3 py-1 bg-overlay text-ink-muted text-sm font-semibold rounded-full">{answerLang}</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center p-1 bg-overlay rounded-sm">
               <button
                 onClick={() => setMode('all')}
@@ -179,7 +179,7 @@ export default function Practice() {
               <select
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                className="px-3 py-1.5 rounded-sm border border-line bg-surface text-sm text-ink-muted focus:outline-none focus:border-focus max-w-[14rem]"
+                className="px-3 py-1.5 rounded-sm border border-line bg-surface text-sm text-ink-muted focus:outline-none focus:border-focus w-full sm:w-auto sm:max-w-[14rem]"
               >
                 <option value="">All categories</option>
                 {categories.map(c => (
@@ -191,15 +191,15 @@ export default function Practice() {
         </div>
 
         {/* Word card */}
-        <div className="bg-surface rounded-xl shadow-lg border border-line-subtle p-12 mb-6">
-          <div className="mb-12">
+        <div className="bg-surface rounded-xl shadow-lg border border-line-subtle p-6 sm:p-12 mb-6">
+          <div className="mb-8 sm:mb-12">
             {promptChips.length > 1 && (
               <p className="text-xs font-semibold uppercase tracking-widest text-ink-faint mb-4">Multiple meanings — translate any one</p>
             )}
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
               {promptChips.map((chip, i) => (
                 <span key={i} className="flex items-baseline gap-x-4">
-                  <span className="text-display font-display font-bold text-ink tracking-tight leading-tight">{chip}</span>
+                  <span className="text-h1 sm:text-display font-display font-bold text-ink tracking-tight leading-tight">{chip}</span>
                   {i < promptChips.length - 1 && (
                     <span className="text-h2 font-light text-ink-disabled select-none">/</span>
                   )}
@@ -245,9 +245,9 @@ export default function Practice() {
               {status === 'wrong' && (
                 <div className="space-y-2">
                   <p className="text-danger font-semibold text-h4">✗ Not quite</p>
-                  {feedback && <p className="text-ink-muted text-base">{feedback}</p>}
+                  {feedback && <p className="text-ink-muted text-body">{feedback}</p>}
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="text-ink-muted text-base">The answer is:</span>
+                    <span className="text-ink-muted text-body">The answer is:</span>
                     {answerChips.map((chip, i) => (
                       <span key={i} className="px-2 py-0.5 bg-overlay text-ink text-sm font-semibold rounded-xs">{chip}</span>
                     ))}
@@ -258,7 +258,7 @@ export default function Practice() {
           )}
 
           {status === 'checking' && (
-            <div className="mt-6 flex items-center gap-3 text-ink-faint text-base">
+            <div className="mt-6 flex items-center gap-3 text-ink-faint text-body">
               <div className="w-5 h-5 border-2 border-line-strong border-t-ink-muted rounded-full animate-spin" />
               Checking your answer…
             </div>

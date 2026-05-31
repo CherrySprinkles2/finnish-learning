@@ -6,7 +6,7 @@ export default function ExampleBlock({ content }: { content: ExampleContent }) {
       <div className="flex flex-wrap gap-x-5 gap-y-2">
         {content.words.map((w, i) => (
           <div key={i} className="flex flex-col">
-            <span className="text-base font-semibold text-ink">{w.fi}</span>
+            <span className="text-body font-semibold text-ink">{w.fi}</span>
             <span className="text-xs text-ink-faint">{w.en}</span>
           </div>
         ))}

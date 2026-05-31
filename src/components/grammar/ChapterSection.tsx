@@ -63,7 +63,7 @@ export default function ChapterSection({
           <div className="px-6 pb-6 pt-2 space-y-8 border-t border-line-subtle">
             {chapter.sections.map((section, s) => (
               <div key={s}>
-                <h3 className="text-base font-semibold text-accent mb-3">{section.topic}</h3>
+                <h3 className="text-body font-semibold text-accent mb-3">{section.topic}</h3>
                 <div className="space-y-4">
                   {section.blocks.map((block, b) => (
                     <BlockRenderer key={b} block={block} />
