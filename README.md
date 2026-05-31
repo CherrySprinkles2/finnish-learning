@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# Finnish Learning App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal tool for learning Finnish vocabulary. Enter your own words and practise by typing translations from memory.
 
-Currently, two official plugins are available:
+## Prerequisites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 18+
+- An Anthropic API key (for AI-powered answer checking)
 
-## React Compiler
+## Setup
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **Clone and install dependencies:**
 
-## Expanding the ESLint configuration
+   ```bash
+   npm install
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **Get an Anthropic API key:**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   Log in at [console.anthropic.com](https://console.anthropic.com), go to **API Keys**, and create a new key.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+3. **Create a `.env` file** in the project root:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```
+   ANTHROPIC_API_KEY=sk-ant-...
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4. **Seed the database** with the initial word list:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+   ```bash
+   npm run seed
+   ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5. **Start the app:**
+
+   ```bash
+   npm start
+   ```
+
+   The app runs at [http://localhost:5173](http://localhost:5173). The Express API runs on port 3001; Vite proxies `/api/*` to it automatically.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start both the Vite dev server and the Express API together |
+| `npm run seed` | Parse `initial-translations.md` and insert words (safe to re-run; skips duplicates) |
+| `npm run backup` | Copy `finnish.db` to `backups/` with a timestamp |
+
+## Stack
+
+- **Frontend:** React 19 + TypeScript, Vite, Tailwind CSS v4
+- **Backend:** Express 5 + better-sqlite3
+- **AI:** Anthropic SDK — Claude Haiku for answer checking (server-side only)
+- **Database:** SQLite (`finnish.db`, gitignored)
