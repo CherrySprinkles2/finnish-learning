@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import type { Word, Direction } from '../types'
+import { getWords } from '../lib/store'
 
 const UNCATEGORISED = 'Uncategorised'
 
@@ -18,79 +19,22 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function Flashcards() {
-  const [words, setWords] = useState<Word[]>([])
-  const [loading, setLoading] = useState(true)
+  const [words] = useState<Word[]>(() => getWords())
   const [params] = useSearchParams()
   const selected = params.get('category') // null = no selection yet; '' = Uncategorised
 
-  useEffect(() => {
-    fetch('/api/words')
-      .then(res => res.json())
-      .then((data: Word[]) => {
-        setWords(data)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-base flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-line border-t-accent rounded-full animate-spin" />
-      </div>
-    )
-  }
-
+  // No category → nothing to flip; send the user back to the vocabulary list.
   if (selected === null) {
-    return <CategoryPicker words={words} />
+    return <Navigate to="/words" replace />
   }
 
   const label = selected === '' ? UNCATEGORISED : selected
   const deck = words.filter(w => (selected === '' ? !w.category : categoryKey(w) === selected))
-  return <Deck label={label} words={deck} />
+  return <Deck label={label} category={selected} words={deck} />
 }
 
-function CategoryPicker({ words }: { words: Word[] }) {
-  // Preserve markdown / insertion order (words arrive id-ascending).
-  const groups: { key: string; count: number }[] = []
-  const seen = new Map<string, number>()
-  for (const w of words) {
-    const key = categoryKey(w)
-    if (!seen.has(key)) {
-      seen.set(key, groups.length)
-      groups.push({ key, count: 0 })
-    }
-    groups[seen.get(key)!].count++
-  }
-  const u = groups.findIndex(g => g.key === UNCATEGORISED)
-  if (u !== -1 && u !== groups.length - 1) groups.push(groups.splice(u, 1)[0])
-
-  return (
-    <div className="min-h-screen bg-base p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-h3 font-display font-bold text-ink mb-2">Flashcards</h1>
-        <p className="text-ink-faint mb-8">Pick a group to study.</p>
-        {groups.length === 0 ? (
-          <p className="text-ink-faint text-center py-16">No words yet — add some in the Vocabulary section.</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {groups.map(g => (
-              <Link
-                key={g.key}
-                to={`/flashcards?category=${encodeURIComponent(g.key === UNCATEGORISED ? '' : g.key)}`}
-                className="bg-surface rounded-lg border border-line shadow-sm p-5 hover:shadow-md hover:border-accent transition-all"
-              >
-                <span className="block font-semibold text-ink truncate">{g.key}</span>
-                <span className="text-sm text-ink-faint">{g.count} words</span>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
-
-function Deck({ label, words }: { label: string; words: Word[] }) {
+function Deck({ label, category, words }: { label: string; category: string; words: Word[] }) {
+  const studyHref = `/study?category=${encodeURIComponent(category)}`
   const [direction, setDirection] = useState<Direction>('fi_to_en')
   const [order, setOrder] = useState<number[]>(() => words.map((_, i) => i))
   const [pos, setPos] = useState(0)
@@ -143,7 +87,7 @@ function Deck({ label, words }: { label: string; words: Word[] }) {
     return (
       <div className="min-h-screen bg-base flex flex-col items-center justify-center p-8">
         <p className="text-ink-muted text-lg mb-6">No words in “{label}” yet.</p>
-        <Link to="/flashcards" className="text-accent hover:underline">← Back to groups</Link>
+        <Link to={studyHref} className="text-accent hover:underline">← Back to study options</Link>
       </div>
     )
   }
@@ -156,7 +100,7 @@ function Deck({ label, words }: { label: string; words: Word[] }) {
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <Link to="/flashcards" className="text-sm text-accent hover:underline">← Groups</Link>
+          <Link to={studyHref} className="text-sm text-accent hover:underline">← Study</Link>
           <span className="font-semibold text-ink">{label}</span>
           <button
             onClick={() => { setDirection(d => d === 'fi_to_en' ? 'en_to_fi' : 'fi_to_en'); setFlipped(false) }}

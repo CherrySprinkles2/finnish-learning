@@ -17,3 +17,29 @@ export interface PracticeWord {
   finnish: string
   direction: Direction
 }
+
+// Plain word record as persisted (no derived stats).
+export interface StoredWord {
+  id: number
+  english: string
+  finnish: string
+  category: string | null
+  created_at: string
+}
+
+export interface Attempt {
+  id: number
+  word_id: number
+  direction: Direction
+  correct: boolean
+  attempted_at: string
+}
+
+// Shape of the localStorage blob and of the export/import JSON file.
+export interface AppData {
+  version: number
+  words: StoredWord[]
+  attempts: Attempt[]
+  nextWordId: number
+  nextAttemptId: number
+}

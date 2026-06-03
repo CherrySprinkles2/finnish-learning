@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   BarChart, Bar, LineChart, Line,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
 } from 'recharts'
+import { getStats } from '../lib/store'
 
 interface DailyPoint { day: string; attempts: number; correct: number }
 interface StrugglingWord {
@@ -120,13 +121,7 @@ function WordTable({ words, variant }: {
 }
 
 export default function Progress() {
-  const [stats, setStats] = useState<Stats | null>(null)
-
-  useEffect(() => {
-    fetch('/api/stats').then(r => r.json()).then(setStats)
-  }, [])
-
-  if (!stats) return <div className="min-h-screen bg-base p-8 text-ink-faint">Loading…</div>
+  const [stats] = useState<Stats>(() => getStats())
 
   const { daily, struggling, knownWell, categoryAccuracy } = stats
 

@@ -30,3 +30,11 @@ backups/
 # Environment variables
 .env
 .env.*
+
+# Cloudflare / wrangler local dev
+.dev.vars
+.wrangler/
+worker-configuration.d.ts
+
+# Generated D1 import (contains personal vocab data)
+scripts/d1-import.sql

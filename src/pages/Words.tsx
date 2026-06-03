@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Word } from '../types'
+import { getWords, addWord as storeAddWord, updateWord, deleteWord as storeDeleteWord } from '../lib/store'
 import ChipEditor from '../components/ChipEditor'
 
 interface EditState {
@@ -49,7 +50,7 @@ function AccuracyBadge({ correct, total }: { correct: number; total: number }) {
 }
 
 export default function Words() {
-  const [words, setWords] = useState<Word[]>([])
+  const [words, setWords] = useState<Word[]>(() => getWords())
   const [english, setEnglish] = useState('')
   const [finnish, setFinnish] = useState('')
   const [category, setCategory] = useState('')
@@ -57,14 +58,9 @@ export default function Words() {
   const [editing, setEditing] = useState<EditState | null>(null)
   const [open, setOpen] = useState<Set<string>>(new Set())
 
-  async function fetchWords() {
-    const res = await fetch('/api/words')
-    setWords(await res.json())
+  function fetchWords() {
+    setWords(getWords())
   }
-
-  useEffect(() => {
-    fetchWords()
-  }, [])
 
   const groups = groupWords(words)
   const categoryNames = groups.map(g => g.category).filter(c => c !== UNCATEGORISED)
@@ -78,42 +74,33 @@ export default function Words() {
     })
   }
 
-  async function addWord(e: React.FormEvent) {
+  function addWord(e: React.FormEvent) {
     e.preventDefault()
     setError('')
-    const res = await fetch('/api/words', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ english, finnish, category }),
-    })
-    if (!res.ok) {
-      const data = await res.json()
-      setError(data.error)
+    if (!english.trim() || !finnish.trim()) {
+      setError('english and finnish are required')
       return
     }
+    storeAddWord({ english, finnish, category })
     setEnglish('')
     setFinnish('')
     // Keep the category selected — handy when adding several words to one group.
     fetchWords()
   }
 
-  async function saveEdit() {
+  function saveEdit() {
     if (!editing) return
-    await fetch(`/api/words/${editing.id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        english: editing.english.join(' / '),
-        finnish: editing.finnish.join(' / '),
-        category: editing.category,
-      }),
+    updateWord(editing.id, {
+      english: editing.english.join(' / '),
+      finnish: editing.finnish.join(' / '),
+      category: editing.category,
     })
     setEditing(null)
     fetchWords()
   }
 
-  async function deleteWord(id: number) {
-    await fetch(`/api/words/${id}`, { method: 'DELETE' })
+  function deleteWord(id: number) {
+    storeDeleteWord(id)
     fetchWords()
   }
 
@@ -204,7 +191,7 @@ export default function Words() {
                       <AccuracyBadge correct={correct} total={total} />
                     </button>
                     <Link
-                      to={`/flashcards?category=${encodeURIComponent(group.category === UNCATEGORISED ? '' : group.category)}`}
+                      to={`/study?category=${encodeURIComponent(group.category === UNCATEGORISED ? '' : group.category)}`}
                       className="shrink-0 px-3 py-1.5 rounded-sm bg-accent-subtle text-accent text-sm font-medium hover:bg-accent-muted transition-colors"
                     >
                       Study →

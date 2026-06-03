@@ -1,69 +1,61 @@
 import { useState, useEffect, useRef } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import type { PracticeWord } from '../types'
 import { isLocalMatch } from '../lib/match'
+import { getPractice, getCategories, recordAttempt } from '../lib/store'
+import { checkAnswer } from '../lib/ai'
 
 type Status = 'idle' | 'checking' | 'correct' | 'wrong'
 
 export default function Practice() {
-  const [word, setWord] = useState<PracticeWord | null>(null)
+  const [params] = useSearchParams()
+  // '' = all categories; seeded from URL (e.g. Study hub). The data is in
+  // localStorage and read synchronously, so the first word is picked up front.
+  const [category, setCategory] = useState(() => params.get('category') ?? '')
+  const [mode, setMode] = useState<'all' | 'mistakes'>('all')
+  const [word, setWord] = useState<PracticeWord | null>(() =>
+    getPractice({ category: (params.get('category') ?? '') || null, mode: 'all' }),
+  )
   const [answer, setAnswer] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [feedback, setFeedback] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [empty, setEmpty] = useState(false)
-  const [categories, setCategories] = useState<{ category: string; count: number }[]>([])
-  const [category, setCategory] = useState('')  // '' = all categories
-  const [mode, setMode] = useState<'all' | 'mistakes'>('all')
-  const lastIdRef = useRef<number | null>(null)
+  const [categories] = useState(() => getCategories())
   const inputRef = useRef<HTMLInputElement>(null)
   const nextRef = useRef<HTMLButtonElement>(null)  // click target only, never auto-focused
 
-  async function fetchWord() {
-    setLoading(true)
+  // Pick a fresh word for the given filters and reset the answer UI. Driven by
+  // event handlers (next word, category/mode change) rather than an effect.
+  function loadWord(nextCategory: string, nextMode: 'all' | 'mistakes', excludeId: number | null) {
     setAnswer('')
     setStatus('idle')
     setFeedback('')
-    const params = new URLSearchParams()
-    if (lastIdRef.current !== null) params.set('exclude', String(lastIdRef.current))
-    if (category) params.set('category', category)
-    if (mode === 'mistakes') params.set('mode', 'mistakes')
-    const qs = params.toString()
-    const res = await fetch(`/api/practice${qs ? `?${qs}` : ''}`)
-    const data = await res.json()
-    if (!data) {
-      setEmpty(true)
-    } else {
-      setWord(data)
-      lastIdRef.current = data.id
-      setEmpty(false)
-    }
-    setLoading(false)
+    setWord(getPractice({ exclude: excludeId, category: nextCategory || null, mode: nextMode }))
   }
 
-  useEffect(() => {
-    fetch('/api/categories').then(res => res.json()).then(setCategories)
-  }, [])
+  function nextWord() {
+    loadWord(category, mode, word?.id ?? null)
+  }
 
-  // Refetch a word whenever the chosen category or mode changes (and on mount).
-  useEffect(() => {
-    lastIdRef.current = null
-    fetchWord()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category, mode])
+  function changeCategory(next: string) {
+    setCategory(next)
+    loadWord(next, mode, null)
+  }
 
-  useEffect(() => {
-    if (!loading) inputRef.current?.focus()
-  }, [loading, status])
+  function changeMode(next: 'all' | 'mistakes') {
+    setMode(next)
+    loadWord(category, next, null)
+  }
 
-  async function giveUp() {
+  // Keep focus on the input as the word changes and after each result.
+  useEffect(() => {
+    inputRef.current?.focus()
+  }, [word, status])
+
+  function giveUp() {
     if (!word) return
     setStatus('wrong')
     setFeedback('')
-    await fetch('/api/attempts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ word_id: word.id, direction: word.direction, correct: false }),
-    })
+    recordAttempt({ word_id: word.id, direction: word.direction, correct: false })
   }
 
   async function submit() {
@@ -74,11 +66,7 @@ export default function Practice() {
 
     if (isLocalMatch(answer, reference)) {
       setStatus('correct')
-      await fetch('/api/attempts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ word_id: word.id, direction: word.direction, correct: true }),
-      })
+      recordAttempt({ word_id: word.id, direction: word.direction, correct: true })
       return
     }
 
@@ -86,39 +74,29 @@ export default function Practice() {
     const prompt = word.direction === 'en_to_fi' ? word.english : word.finnish
 
     try {
-      const res = await fetch('/api/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt, user_answer: answer.trim(), reference, direction: word.direction, word_id: word.id }),
+      const { correct, feedback: fb } = await checkAnswer({
+        prompt,
+        user_answer: answer.trim(),
+        reference,
+        direction: word.direction,
+        word_id: word.id,
       })
-      const { correct, feedback: fb } = await res.json()
       setStatus(correct ? 'correct' : 'wrong')
       if (fb) setFeedback(fb)
-      await fetch('/api/attempts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ word_id: word.id, direction: word.direction, correct }),
-      })
+      recordAttempt({ word_id: word.id, direction: word.direction, correct })
     } catch {
       setStatus('idle')
     }
   }
 
-  if (loading) {
-    return (
-      <Screen>
-        <div className="w-10 h-10 border-4 border-line border-t-accent rounded-full animate-spin" />
-      </Screen>
-    )
-  }
-
-  if (empty) {
+  // word === null means getPractice found no candidates for the current filters.
+  if (word === null) {
     if (mode === 'mistakes') {
       return (
         <Screen>
           <p className="text-ink-muted text-lg mb-6">No mistakes to review 🎉</p>
           <button
-            onClick={() => setMode('all')}
+            onClick={() => changeMode('all')}
             className="px-8 py-3 bg-accent text-on-accent font-medium rounded-md hover:bg-accent-hover transition-colors"
           >
             Practise all words →
@@ -135,8 +113,6 @@ export default function Practice() {
       </Screen>
     )
   }
-
-  if (!word) return null
 
   const promptRaw = word.direction === 'en_to_fi' ? word.english : word.finnish
   const promptLang = word.direction === 'en_to_fi' ? 'English' : 'Finnish'
@@ -159,7 +135,7 @@ export default function Practice() {
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center p-1 bg-overlay rounded-sm">
               <button
-                onClick={() => setMode('all')}
+                onClick={() => changeMode('all')}
                 className={`px-3 py-1 text-sm font-semibold rounded-sm transition-colors ${
                   mode === 'all' ? 'bg-surface text-ink shadow-sm' : 'text-ink-faint hover:text-ink-muted'
                 }`}
@@ -167,7 +143,7 @@ export default function Practice() {
                 All words
               </button>
               <button
-                onClick={() => setMode('mistakes')}
+                onClick={() => changeMode('mistakes')}
                 className={`px-3 py-1 text-sm font-semibold rounded-sm transition-colors ${
                   mode === 'mistakes' ? 'bg-surface text-ink shadow-sm' : 'text-ink-faint hover:text-ink-muted'
                 }`}
@@ -178,7 +154,7 @@ export default function Practice() {
             {categories.length > 0 && (
               <select
                 value={category}
-                onChange={e => setCategory(e.target.value)}
+                onChange={e => changeCategory(e.target.value)}
                 className="px-3 py-1.5 rounded-sm border border-line bg-surface text-sm text-ink-muted focus:outline-none focus:border-focus w-full sm:w-auto sm:max-w-[14rem]"
               >
                 <option value="">All categories</option>
@@ -216,7 +192,7 @@ export default function Practice() {
             onKeyDown={e => {
               if (e.key !== 'Enter') return
               if (status === 'idle') submit()
-              else if (status === 'correct' || status === 'wrong') fetchWord()
+              else if (status === 'correct' || status === 'wrong') nextWord()
             }}
             readOnly={status !== 'idle'}
             placeholder={`Type ${answerLang} translation…`}
@@ -286,7 +262,7 @@ export default function Practice() {
           {(status === 'correct' || status === 'wrong') && (
             <button
               ref={nextRef}
-              onClick={fetchWord}
+              onClick={nextWord}
               className="flex-1 py-4 bg-accent text-on-accent text-lg font-semibold rounded-lg hover:bg-accent-hover active:scale-95 transition-all focus:outline-none focus:ring-2 focus:ring-focus focus:ring-offset-2"
             >
               Next word →

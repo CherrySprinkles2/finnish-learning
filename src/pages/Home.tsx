@@ -10,14 +10,8 @@ const sections = [
   {
     to: '/words',
     title: 'Vocabulary',
-    description: 'Add and manage your word list',
+    description: 'Manage your words and study them by category',
     emoji: '📝',
-  },
-  {
-    to: '/flashcards',
-    title: 'Flashcards',
-    description: 'Study a group of words by flipping cards',
-    emoji: '🃏',
   },
   {
     to: '/grammar',

@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom'
 const links = [
   { to: '/practice', label: 'Practice' },
   { to: '/words', label: 'Vocabulary' },
-  { to: '/flashcards', label: 'Flashcards' },
   { to: '/progress', label: 'Progress' },
   { to: '/grammar', label: 'Grammar' },
+  { to: '/settings', label: 'Settings' },
 ]
 
 export default function NavBar() {

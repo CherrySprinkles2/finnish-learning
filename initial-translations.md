@@ -165,8 +165,8 @@
 | Finnish | English |
 |---|---|
 | naimisissa | married |
-| G + kanssa | with (someone) |
-| rakastaa + P | to love (someone) |
+| Leikin koiran kanssa | I play with the dog |
+| Rakastan sinua | I love you |
 | meillä on | we have |
 | lapsi | child |
 | söpö | cute |
@@ -174,9 +174,9 @@
 | tyttö | girl |
 | bussikuski | bus driver |
 | minulla ei ole | I don't have |
-| etsiä + P | to look for (something) |
+| He etsivät autoa | They look for a car |
 | hoikka | slim / slender |
-| pitää + sta/stä | to like (something) |
+| Pidän kahvista | I like coffee |
 | urheilu | sports / exercise |
 | rauhallinen | calm / peaceful |
 | ehkä | maybe / perhaps |

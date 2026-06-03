@@ -4,49 +4,67 @@ A personal tool for learning Finnish vocabulary. The user enters their own words
 
 ## Stack
 
-- **Frontend:** React 19 + TypeScript, Vite, Tailwind CSS v4
-- **Backend:** Express 5 + better-sqlite3, running locally via `tsx`
-- **AI:** `@anthropic-ai/sdk` — used server-side for answer checking (Claude Haiku, with prompt caching)
-- **Database:** SQLite (`finnish.db` in the project root, gitignored)
+- **Client-side React app.** A static React 19 + TypeScript SPA (Vite, Tailwind CSS v4) that deploys as flat files. All data and logic live in the browser.
+- **Storage:** the browser's `localStorage` (see Data store).
+- **AI:** `@anthropic-ai/sdk` — called **directly from the browser** for answer checking (Claude Haiku, prompt caching), using a user-supplied API key and `dangerouslyAllowBrowser: true`.
 - **Routing:** React Router v7
+
+It is single-user-per-browser by design: each browser keeps its own vocabulary in `localStorage`.
 
 ## Running the app
 
 ```bash
-npm start         # starts both servers together via concurrently
-npm run seed      # parses initial-translations.md and inserts words (safe to re-run, skips duplicates)
-npm run backup    # copies finnish.db to backups/ with a timestamp
+npm start            # vite dev server (the only server)
+npm run build        # tsc -b && vite build → dist/
+npm run seed:generate # regenerate src/data/seedWords.ts from initial-translations.md (Kappale 1–6)
 ```
 
-Vite runs on **port 5173**, Express on **port 3001**. Vite proxies all `/api/*` requests to Express so there are no CORS issues.
+Backups are handled **in the app** (Settings → Export / Import a JSON file), not by an npm script.
 
-The server requires `ANTHROPIC_API_KEY` to be set (loaded via `--env-file=.env`).
+## Deployment
+
+Hosted on **Cloudflare Pages** via the dashboard's Git integration — no `wrangler.toml`, no Functions, no GitHub Action (it's a pure static SPA). Settings: **build command** `npm run build`, **output directory** `dist`, framework preset Vite. Every push to `master` auto-builds; PRs get preview URLs.
+
+- `public/_redirects` (`/* /index.html 200`) is the SPA catch-all — without it, a direct visit or refresh on any client route (`/practice`, `/quiz`, `/words`, …) 404s instead of loading the app and letting React Router handle it.
+- `.nvmrc` pins Node 22 for the build (the toolchain — Vite 8, TypeScript 6 — needs a current Node).
+- There are **no server secrets**: the Anthropic key is user-supplied and lives in the visitor's own `localStorage`, and the SDK calls the API directly from the browser. Nothing to configure in the Pages dashboard.
 
 ## Project structure
 
 ```
-server/
-  db.ts             # Shared SQLite connection + schema + migrations (imported by index.ts and seed.ts)
-  index.ts          # Express API + Anthropic client
-  seed.ts           # Parses initial-translations.md (incl. ## headers → category) and populates the database
+scripts/
+  generate-seed-data.ts # parses initial-translations.md (## headers → category) → src/data/seedWords.ts
 src/
   index.css         # Tailwind import + theme tokens (see Theming below)
-  types.ts          # Shared TypeScript interfaces (Word, PracticeWord, Direction)
+  types.ts          # Shared interfaces (Word, PracticeWord, Direction, StoredWord, Attempt, AppData)
+  App.tsx           # Onboarding gate (first-run Welcome) + backup-reminder banner; requests persistent storage on mount
   lib/
+    store.ts        # THE DATA LAYER — localStorage-backed words/attempts; all read/write/query logic + backup bookkeeping (see Data store)
+    ai.ts           # Browser-side AI answer check (@anthropic-ai/sdk, dangerouslyAllowBrowser)
+    apiKey.ts       # get/set/clear the Anthropic key in localStorage
+    backup.ts       # downloadBackup() — serialise data to a JSON file + mark backed up (shared by Settings + banner)
+    storage.ts      # Storage-durability helpers (navigator.storage.persist/persisted/estimate)
     match.ts        # Local answer-matching (shared by Practice and grammar exercises)
   pages/
+    Welcome.tsx     # First-run gate: enter the API key (or skip), then continue into the app
+    Settings.tsx    # Manage the API key + export/import data JSON + storage-durability panel (persistence, usage, last backup)
     Home.tsx        # Landing page with nav cards
-    Practice.tsx    # Typing practice session (with category filter)
-    Words.tsx       # Vocabulary management, grouped by category (add / edit / delete / stats)
-    Flashcards.tsx  # Per-category flashcard study (flip / shuffle / direction toggle); study-only
+    Practice.tsx    # Typing practice session (category filter; accepts ?category= from the Study hub)
+    Words.tsx       # Vocabulary management, grouped by category (add / edit / delete / stats); each category has a "Study →" button → Study hub
+    Study.tsx       # Per-category study hub: picks an exercise mode (Flashcards / Matching / Typed recall / Multiple choice). Reached as /study?category=<name>; /study with no category redirects to Words
+    Flashcards.tsx  # Per-category flashcard deck (flip / shuffle / direction toggle); study-only. Launched from the Study hub; /flashcards with no category redirects to Words
+    Matching.tsx    # Per-category matching game (tap Finnish ↔ English, rounds of 6); study-only. Launched from the Study hub
+    Progress.tsx    # Stats dashboard (daily activity/accuracy, struggling/known-well words, per-category accuracy) — recharts; reads store.getStats()
     Grammar.tsx     # Grammar reference (Kappale 1–5) — see src/data/grammar.ts
-    Quiz.tsx        # Placeholder for future multiple-choice quiz
+    Quiz.tsx        # Per-category multiple-choice game (pick the right translation from four; distractors from the same category). Study-only. Launched from the Study hub as /quiz?category=
   components/
     NavBar.tsx      # Sticky top nav shared across all pages
+    BackupReminder.tsx # Dismissible "you have un-backed-up changes" banner (see Data durability)
     ChipEditor.tsx  # Chip-based input for words with multiple valid translations
     grammar/        # Grammar block components (ProseBlock, GrammarTable, ExerciseBlock, …)
   data/
     grammar.ts      # Static grammar content (typed chapter/section/block tree)
+    seedWords.ts    # AUTO-GENERATED Kappale 1–6 starter words (npm run seed:generate); seeded on first run
 ```
 
 ## Theming
@@ -70,58 +88,76 @@ The UI uses a single dark theme, **`revontuli`** (northern lights — deep navy 
 
 Conventions: primary actions are `bg-accent text-on-accent`; English word chips use **info** (blue), Finnish chips use **warning** (gold); headings carry `font-display` (Space Grotesk) — body text is Manrope, code/grammar tables are `font-mono` (JetBrains Mono). Type sizes use `text-display` / `text-h1`–`text-h4` / `text-body{,-lg}`; smaller sizes reuse Tailwind's `text-sm`/`text-xs` (already equal to the scale). Recharts colours in `Progress.tsx` reference `var(--…)` directly since they aren't class-based.
 
-**Adding a theme:** add another `[data-theme="name"]` block defining the same colour variables, then set `data-theme` on `<html>`. No component changes needed. (`docs/theming.md` is the original design artifact — `src/index.css` is now the source of truth.)
+**Adding a theme:** add another `[data-theme="name"]` block defining the same colour variables, then set `data-theme` on `<html>`. No component changes needed. (`src/index.css` is the source of truth for theme tokens.)
 
-## Database schema
+## Data store (`src/lib/store.ts`)
 
-```sql
-words (
-  id          INTEGER PRIMARY KEY AUTOINCREMENT,
-  english     TEXT NOT NULL,
-  finnish     TEXT NOT NULL,
-  category    TEXT,               -- from the "## Section" header in initial-translations.md; null = uncategorised
-  created_at  TEXT NOT NULL DEFAULT (datetime('now'))
-)
+All data lives in `localStorage` and is read/written through `store.ts` — the single source of truth for words and attempt history. Pages import its functions and call them synchronously.
 
-attempts (
-  id           INTEGER PRIMARY KEY AUTOINCREMENT,
-  word_id      INTEGER NOT NULL REFERENCES words(id) ON DELETE CASCADE,
-  direction    TEXT NOT NULL CHECK(direction IN ('en_to_fi', 'fi_to_en')),
-  correct      INTEGER NOT NULL,   -- 1 = correct, 0 = wrong
-  attempted_at TEXT NOT NULL DEFAULT (datetime('now'))
-)
-```
+**localStorage keys:**
+- `finnish:data` → `{ version, words[], attempts[], nextWordId, nextAttemptId }` (the `AppData` shape in `types.ts`). Words: `{ id, english, finnish, category, created_at }`. Attempts: `{ id, word_id, direction, correct (boolean), attempted_at }`. IDs are numeric, assigned from the monotonic counters. Timestamps use `YYYY-MM-DD HH:MM:SS` UTC format; the Progress page parses them by appending `'Z'`.
+- `finnish:apiKey` → the Anthropic key (separate key; never included in export/import).
+- `finnish:onboarded` → `"1"` once the first-run gate is dismissed.
+- `finnish:lastModified` / `finnish:lastBackup` → epoch-ms timestamps driving the backup reminder (see Data durability).
 
-## API endpoints
+**Seeding:** on first run (`finnish:data` absent), the store seeds the Kappale 1–6 starter words from `src/data/seedWords.ts`. A deliberate clear to an empty list keeps the key present, so it never silently re-seeds.
 
-| Method | Path | Description |
-|--------|------|-------------|
-| GET | `/api/words` | All words (with `category`) plus attempt stats (total, correct %, last tried), ordered by id |
-| POST | `/api/words` | Add a word `{ english, finnish, category? }` |
-| PUT | `/api/words/:id` | Update a word's english, finnish, and/or category |
-| DELETE | `/api/words/:id` | Delete a word and its attempts |
-| GET | `/api/categories` | Distinct non-empty categories with word counts, in markdown order `[{ category, count }]` |
-| GET | `/api/practice` | Weighted random word + random direction. Accepts `?exclude=<id>` (avoid repeat), `?category=<name>` (restrict to one category), and `?mode=mistakes` (restrict to recently-struggled words). Returns `null` if the resulting pool is empty |
-| POST | `/api/attempts` | Record an attempt `{ word_id, direction, correct }` |
-| POST | `/api/check` | AI-powered answer check `{ prompt, user_answer, reference, direction, word_id? }` → `{ correct, feedback }` |
+**Functions:**
+
+| Function | Notes |
+|----------|-------|
+| `getWords()` | Words joined with per-word attempt stats (total, correct count, last tried), ordered by id |
+| `addWord` / `updateWord` / `deleteWord` | `deleteWord` cascades to the word's attempts |
+| `getCategories()` | Distinct non-empty categories + counts, in insertion (min-id) order |
+| `getPractice({exclude?, category?, mode?})` | Weighted random word + random direction; `null` if the pool is empty (see weighting below) |
+| `recordAttempt({word_id, direction, correct})` | Appends an attempt |
+| `getStats()` | `{ daily, struggling, knownWell, categoryAccuracy }` for the Progress page |
+| `appendTranslation(id, direction, answer)` | Adds a newly-confirmed translation to a word's field (auto-save) |
+| `exportData` / `importData` / `isValidImport` | Settings backup: export the blob, replace it from an imported file (validates shape, recomputes counters) |
+| `markBackedUp` / `getBackupInfo` / `shouldRemindBackup` | Backup-reminder bookkeeping (see Data durability) |
+
+The AI check lives separately in `src/lib/ai.ts` (`checkAnswer(...)`), since it makes a network call.
+
+## Data durability & backups
+
+`localStorage` survives tab/browser close but **can** be lost to: the user clearing site data, private windows, browser eviction under storage pressure, or Safari deleting script-written storage after ~7 days without a visit. Two defences:
+
+- **Persistent storage:** `App.tsx` calls `requestPersistence()` (`src/lib/storage.ts` → `navigator.storage.persist()`) on mount — best-effort, asks the browser not to evict the origin. Settings shows the status, the app-data size (`store.dataSize()` — bytes of the `finnish:data` blob, not the misleading whole-origin `navigator.storage.estimate()`), and a "Make storage persistent" button.
+- **Backups:** the only true safety net. `downloadBackup()` (`src/lib/backup.ts`) writes the data JSON and calls `markBackedUp()`. Import also counts as a backup point. Every write sets `finnish:lastModified`; export/import sets `finnish:lastBackup`.
+- **Reminder banner:** `shouldRemindBackup()` gates `BackupReminder` — deliberately conservative (nudge, not nag): only when there are attempts to lose **and** there are changes since the last backup **and** (never backed up, or the last backup is ≥7 days old). Dismissible per session via `sessionStorage` `finnish:backupBannerDismissed`. It is **not** a `beforeunload` prompt (closing doesn't lose data; that would nag without protecting anything).
 
 ## Practice rules
 
 - Direction is random per round: English → Finnish or Finnish → English
 - Marking is **two-phase**:
-  1. **Local match first** — the answer is split on `/` and each alternative is compared case-insensitively (parenthetical notes stripped). If any alternative matches, it's immediately marked correct without an API call.
-  2. **AI fallback** — if no local match, the answer is sent to `/api/check` (Claude Haiku). The AI is lenient about equally valid translations and phrasing variations, but strict about wrong vocabulary.
+  1. **Local match first** (`src/lib/match.ts`) — the answer is split on `/` and each alternative is compared case-insensitively (parenthetical notes stripped). If any alternative matches, it's immediately marked correct without an API call.
+  2. **AI fallback** (`src/lib/ai.ts` `checkAnswer`) — if no local match, the answer is sent to Claude Haiku **directly from the browser**. The AI is lenient about equally valid translations and phrasing variations, but strict about wrong vocabulary. **If no API key is set**, this phase can't run, so the answer is marked **wrong** (only exact matches are accepted) with a hint pointing at Settings.
 - Press **Enter** to check an answer, press **Enter** again (or click Next) to move to the next word
 - The previously shown word is always excluded from the next draw (unless that would empty a small category, in which case the exclusion is ignored)
 - A **"Don't know"** button marks the word wrong immediately without requiring an answer
 - A **category selector** restricts the draw to one category ("All categories" by default); changing it refetches a fresh word
 - A **mode toggle** ("All words" / "Review mistakes") restricts the draw to recently-struggled words — <50% correct over the last 5 attempts, last tried within 30 days (the same "struggling" set surfaced on the Progress page). Combinable with the category filter; shows a "No mistakes to review" state when the pool is empty
 
+## Study modes (per-category)
+
+Studying is organised around the vocabulary categories rather than a single flashcard page. There is **no standalone Flashcards nav item** — the only entry point is the **"Study →" button** on each category card in the Vocabulary page.
+
+Flow: **Vocabulary → "Study →" → Study hub (`/study?category=<name>`) → a mode**. The hub (`Study.tsx`) shows one tile per exercise mode for that category:
+
+| Mode | Route | Notes |
+|------|-------|-------|
+| Flashcards | `/flashcards?category=` | Flip/shuffle/direction-toggle deck (`Flashcards.tsx`). Study-only. |
+| Matching | `/matching?category=` | Tap-to-pair Finnish ↔ English in rounds of `ROUND_SIZE` (6); progress bar + mistake count (`Matching.tsx`). Study-only. |
+| Typed recall | `/practice?category=` | Reuses `Practice.tsx`, which seeds its category filter from the `?category=` param. Records attempts. |
+| Multiple choice | `/quiz?category=` | Pick the right translation from four; distractors drawn from the same category (topped up from the global pool when the category is small). Random direction per question; keys 1–4 select, Enter advances. Study-only (`Quiz.tsx`). |
+
+Conventions shared by the study pages: `?category=` is the contract (`null` = no selection → redirect to Vocabulary; `''` = Uncategorised; otherwise the exact category name). Tiles/cards display only the **first ` / ` variant** of a word to stay compact. Matching and Flashcards are **study-only** (no `recordAttempt` writes), so they don't affect Progress stats or practice weighting; only Typed recall records attempts. Back-links from a deck/game return to that category's hub (`/study?category=`).
+
 ## Multi-value words and auto-save
 
 Words can store multiple valid translations, separated by ` / ` (e.g. `koira / peni`). The `ChipEditor` component provides a chip-based UI for editing these in the Words page.
 
-When the AI marks an answer correct via `/api/check`, the server checks whether the student's answer is already stored. If it's a new valid translation, it's automatically appended to the word's field (e.g. `koira` → `koira / peni`). This grows the local match list over time so future checks skip the API call.
+When the AI marks an answer correct (`ai.ts` → `store.appendTranslation`), the store checks whether the student's answer is already stored. If it's a new valid translation, it's automatically appended to the word's field (e.g. `koira` → `koira / peni`). This grows the local match list over time so future checks skip the API call.
 
 ## Practice word selection — weighted random
 
@@ -135,7 +171,7 @@ Words are not selected with equal probability. Each word gets a weight based on 
 
 **Weight = recency × accuracy** (range 1–25). A struggling word not seen in a month is up to 25× more likely to appear than a mastered word seen today.
 
-All weighting constants are defined at the top of the `/api/practice` handler in `server/index.ts` and are easy to tune:
+All weighting constants are defined near the top of `src/lib/store.ts` (the practice section) and are easy to tune:
 
 ```ts
 RECENCY_MAX_DAYS = 30   // days at which recency score is capped
@@ -155,17 +191,18 @@ ACCURACY_UNSEEN = 3     // score for a word never attempted
 
 ## Categories (grouping)
 
-- Each `## Section` header in `initial-translations.md` becomes the `category` for the rows beneath it. The markdown is the **single source of truth** — `npm run seed` re-applies categories on every run (markdown wins over any manual category change to a seeded word).
-- The Vocabulary page groups words into collapsible category cards; Flashcards and the Practice category filter both build their lists from these categories.
-- To add a new themed group: add a `## My Group` section to the markdown and run `npm run seed`. Manually-added words (via the UI) can be given any category, including a brand-new one.
+- Each `## Section` header in `initial-translations.md` becomes the `category` for the rows beneath it. The markdown is the source of truth for the **starter set only**: `npm run seed:generate` regenerates `src/data/seedWords.ts`, which is seeded into a browser **once** on first run.
+- After first run the user's `localStorage` is authoritative — there is no re-seed, so manual edits/categories in the UI persist and are never overwritten.
+- The Vocabulary page groups words into collapsible category cards; the Study hub, its exercise modes, and the Practice category filter all build their lists from these categories.
+- To add words to an existing browser: add them via the Vocabulary UI (any category, including a new one). To change the bundled starter set new users get: edit the markdown and run `npm run seed:generate`.
 
 ## Planned features (not yet built)
 
-- Multiple-choice quiz (page scaffolded, not yet implemented)
 - Grammar reference Kappale 7–9 (data structure in place; fill `src/data/grammar.ts` as that vocabulary is added)
-- Vocabulary expansion — the user will ask Claude to add themed word sets directly into the database via the seed script or a new markdown file
+- Vocabulary expansion — the user will ask Claude to add themed word sets, either into the bundled starter set (markdown → `npm run seed:generate`) or directly via the Vocabulary UI
 
 ## What NOT to do
 
+- **Never run git commands that write or change state** — no `commit`, `add`, `branch`, `checkout`, `push`, `merge`, `rebase`, `reset`, `stash`, `tag`, etc. Read-only git (`status`, `log`, `diff`, `show`) is fine. The user manages all git operations themselves; stage and commit nothing on their behalf.
 - Do not add audio/listening features — explicitly out of scope
-- Do not add a remote backend or authentication — this is a local-only tool
+- Do not start the dev server (`npm start`) — the user runs it themselves
