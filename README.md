@@ -18,7 +18,7 @@ It's a client-side React app: all your words, practice history, and settings liv
 
 ## Prerequisites
 
-- **Node.js 22** — check with `node --version` (see `.nvmrc`)
+- **Node.js 22+** — check with `node --version`
 - **An Anthropic API key** (optional) — enables AI answer checking. Without one, answers are checked against your stored translations only.
 
 ---

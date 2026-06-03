@@ -23,11 +23,10 @@ Backups are handled **in the app** (Settings → Export / Import a JSON file), n
 
 ## Deployment
 
-Hosted on **Cloudflare Pages** via the dashboard's Git integration — no `wrangler.toml`, no Functions, no GitHub Action (it's a pure static SPA). Settings: **build command** `npm run build`, **output directory** `dist`, framework preset Vite. Every push to `master` auto-builds; PRs get preview URLs.
+Hosted on **Cloudflare Pages** via the dashboard's Git integration — the same setup as the `hex-map-tool` repo. Cloudflare builds the site on every push: **build command** `npm run build`, **output directory** `dist`, framework preset Vite. Pushes to `master` deploy to production; pull requests get preview URLs. Deploying is just `git push`; Cloudflare handles the build.
 
-- `public/_redirects` (`/* /index.html 200`) is the SPA catch-all — without it, a direct visit or refresh on any client route (`/practice`, `/quiz`, `/words`, …) 404s instead of loading the app and letting React Router handle it.
-- `.nvmrc` pins Node 22 for the build (the toolchain — Vite 8, TypeScript 6 — needs a current Node).
-- There are **no server secrets**: the Anthropic key is user-supplied and lives in the visitor's own `localStorage`, and the SDK calls the API directly from the browser. Nothing to configure in the Pages dashboard.
+- `public/_redirects` (`/* /index.html 200`) routes every path to `index.html` so React Router handles client routes (`/practice`, `/quiz`, `/words`, …) on direct visits and refreshes.
+- The Anthropic key is supplied by each user and lives in their own browser's `localStorage`, so the deploy needs no secrets or environment variables.
 
 ## Project structure
 
