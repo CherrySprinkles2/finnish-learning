@@ -42,4 +42,8 @@ export interface AppData {
   attempts: Attempt[]
   nextWordId: number
   nextAttemptId: number
+  // Category names hidden from Practice + Progress (by display key, where
+  // Uncategorised words use the literal 'Uncategorised'). View-only filter —
+  // the words themselves are untouched. Travels with export/import.
+  disabledCategories: string[]
 }

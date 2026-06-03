@@ -1,8 +1,24 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import type { Word } from '../types'
-import { getWords, addWord as storeAddWord, updateWord, deleteWord as storeDeleteWord } from '../lib/store'
+import { getWords, updateWord, deleteWord as storeDeleteWord, getDisabledCategories, setCategoryDisabled } from '../lib/store'
 import ChipEditor from '../components/ChipEditor'
+
+function EyeIcon({ off }: { off: boolean }) {
+  return off ? (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
+      <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
+      <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
+      <line x1="2" x2="22" y1="2" y2="22" />
+    </svg>
+  ) : (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  )
+}
 
 interface EditState {
   id: number
@@ -51,12 +67,14 @@ function AccuracyBadge({ correct, total }: { correct: number; total: number }) {
 
 export default function Words() {
   const [words, setWords] = useState<Word[]>(() => getWords())
-  const [english, setEnglish] = useState('')
-  const [finnish, setFinnish] = useState('')
-  const [category, setCategory] = useState('')
-  const [error, setError] = useState('')
   const [editing, setEditing] = useState<EditState | null>(null)
   const [open, setOpen] = useState<Set<string>>(new Set())
+  const [disabled, setDisabled] = useState<Set<string>>(() => new Set(getDisabledCategories()))
+
+  function toggleDisabled(cat: string) {
+    setCategoryDisabled(cat, !disabled.has(cat))
+    setDisabled(new Set(getDisabledCategories()))
+  }
 
   function fetchWords() {
     setWords(getWords())
@@ -72,20 +90,6 @@ export default function Words() {
       else next.add(cat)
       return next
     })
-  }
-
-  function addWord(e: React.FormEvent) {
-    e.preventDefault()
-    setError('')
-    if (!english.trim() || !finnish.trim()) {
-      setError('english and finnish are required')
-      return
-    }
-    storeAddWord({ english, finnish, category })
-    setEnglish('')
-    setFinnish('')
-    // Keep the category selected — handy when adding several words to one group.
-    fetchWords()
   }
 
   function saveEdit() {
@@ -107,75 +111,45 @@ export default function Words() {
   return (
     <div className="min-h-screen bg-base p-4 sm:p-8">
       <div className="max-w-5xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 gap-3">
           <h1 className="text-h3 font-display font-bold text-ink">Vocabulary</h1>
-          {groups.length > 0 && (
-            <div className="flex gap-2 text-sm">
-              <button
-                onClick={() => setOpen(new Set(groups.map(g => g.category)))}
-                className="px-3 py-1.5 rounded-sm text-ink-muted hover:bg-overlay transition-colors"
-              >
-                Expand all
-              </button>
-              <button
-                onClick={() => setOpen(new Set())}
-                className="px-3 py-1.5 rounded-sm text-ink-muted hover:bg-overlay transition-colors"
-              >
-                Collapse all
-              </button>
-            </div>
-          )}
+          <div className="flex items-center gap-2 text-sm">
+            {groups.length > 0 && (
+              <>
+                <button
+                  onClick={() => setOpen(new Set(groups.map(g => g.category)))}
+                  className="px-3 py-1.5 rounded-sm text-ink-muted hover:bg-overlay transition-colors"
+                >
+                  Expand all
+                </button>
+                <button
+                  onClick={() => setOpen(new Set())}
+                  className="px-3 py-1.5 rounded-sm text-ink-muted hover:bg-overlay transition-colors"
+                >
+                  Collapse all
+                </button>
+              </>
+            )}
+            <Link
+              to="/words/add"
+              className="px-4 py-1.5 rounded-sm bg-accent text-on-accent font-medium hover:bg-accent-hover transition-colors whitespace-nowrap"
+            >
+              + Add vocabulary
+            </Link>
+          </div>
         </div>
-
-        <form onSubmit={addWord} className="bg-surface rounded-lg border border-line shadow-sm p-6 mb-8 flex flex-wrap gap-3 items-end">
-          <div className="flex-1 min-w-[140px]">
-            <label className="block text-sm text-ink-muted mb-1 font-medium">English</label>
-            <input
-              value={english}
-              onChange={e => setEnglish(e.target.value)}
-              placeholder="dog"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
-            />
-          </div>
-          <div className="flex-1 min-w-[140px]">
-            <label className="block text-sm text-ink-muted mb-1 font-medium">Finnish</label>
-            <input
-              value={finnish}
-              onChange={e => setFinnish(e.target.value)}
-              placeholder="koira"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
-            />
-          </div>
-          <div className="flex-1 min-w-[140px]">
-            <label className="block text-sm text-ink-muted mb-1 font-medium">Category</label>
-            <input
-              value={category}
-              onChange={e => setCategory(e.target.value)}
-              placeholder="Eläimet (optional)"
-              list="category-list"
-              className="w-full border border-line-strong rounded-sm px-3 py-2 focus:outline-none focus:border-focus text-body"
-            />
-          </div>
-          <button
-            type="submit"
-            className="px-5 py-2 bg-accent text-on-accent rounded-sm hover:bg-accent-hover transition-colors whitespace-nowrap"
-          >
-            Add word
-          </button>
-        </form>
 
         <datalist id="category-list">
           {categoryNames.map(c => <option key={c} value={c} />)}
         </datalist>
 
-        {error && <p className="text-danger text-sm mb-4">{error}</p>}
-
         {words.length === 0 ? (
-          <p className="text-ink-faint text-center py-16">No words yet — add some above.</p>
+          <p className="text-ink-faint text-center py-16">No words yet — use “+ Add vocabulary” to get started.</p>
         ) : (
           <div className="space-y-3">
             {groups.map(group => {
               const isOpen = open.has(group.category)
+              const isHidden = disabled.has(group.category)
               const total = group.words.reduce((s, w) => s + w.total_attempts, 0)
               const correct = group.words.reduce((s, w) => s + w.correct_count, 0)
               return (
@@ -183,12 +157,24 @@ export default function Words() {
                   <div className="flex items-center gap-3 px-5 py-3.5">
                     <button
                       onClick={() => toggle(group.category)}
-                      className="flex items-center gap-3 flex-1 text-left min-w-0"
+                      className={`flex items-center gap-3 flex-1 text-left min-w-0 transition-opacity ${isHidden ? 'opacity-50' : ''}`}
                     >
                       <span className={`text-ink-faint text-lg transition-transform shrink-0 ${isOpen ? 'rotate-180' : ''}`}>⌄</span>
                       <span className="font-semibold text-ink truncate">{group.category}</span>
+                      {isHidden && (
+                        <span className="shrink-0 px-1.5 py-0.5 rounded-xs bg-overlay text-ink-faint text-xs font-medium uppercase tracking-wider">Hidden</span>
+                      )}
                       <span className="text-sm text-ink-faint shrink-0">{group.words.length} words</span>
                       <AccuracyBadge correct={correct} total={total} />
+                    </button>
+                    <button
+                      onClick={() => toggleDisabled(group.category)}
+                      title={isHidden ? 'Hidden from Practice & Progress — click to show' : 'Hide from Practice & Progress'}
+                      aria-label={isHidden ? `Show ${group.category} in Practice and Progress` : `Hide ${group.category} from Practice and Progress`}
+                      aria-pressed={isHidden}
+                      className={`shrink-0 p-1.5 rounded-sm transition-colors hover:bg-overlay ${isHidden ? 'text-ink-faint hover:text-ink' : 'text-ink-muted hover:text-ink'}`}
+                    >
+                      <EyeIcon off={isHidden} />
                     </button>
                     <Link
                       to={`/study?category=${encodeURIComponent(group.category === UNCATEGORISED ? '' : group.category)}`}

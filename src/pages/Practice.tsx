@@ -19,7 +19,17 @@ export default function Practice() {
   const [answer, setAnswer] = useState('')
   const [status, setStatus] = useState<Status>('idle')
   const [feedback, setFeedback] = useState('')
-  const [categories] = useState(() => getCategories())
+  // Hidden categories are dropped from the picker. If we were deep-linked into
+  // one (e.g. Study → Typed recall on a hidden deck), keep it as an option so
+  // the select isn't blank and the session still works.
+  const [categories] = useState(() => {
+    const visible = getCategories({ includeDisabled: false })
+    const current = params.get('category') ?? ''
+    if (current && !visible.some(c => c.category === current)) {
+      return [{ category: current, count: 0 }, ...visible]
+    }
+    return visible
+  })
   const inputRef = useRef<HTMLInputElement>(null)
   const nextRef = useRef<HTMLButtonElement>(null)  // click target only, never auto-focused
 

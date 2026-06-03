@@ -18,6 +18,14 @@ const LAST_MODIFIED_KEY = 'finnish:lastModified'
 const LAST_BACKUP_KEY = 'finnish:lastBackup'
 const BACKUP_REMINDER_DAYS = 7
 
+// Display key for a word's category — null/blank collapses to 'Uncategorised',
+// matching the grouping in Words.tsx. The disabled-categories set is keyed by
+// this, so toggling the Uncategorised card works too.
+const UNCATEGORISED = 'Uncategorised'
+function categoryKey(category: string | null): string {
+  return category?.trim() || UNCATEGORISED
+}
+
 // ---------------------------------------------------------------------------
 // Timestamps
 // ---------------------------------------------------------------------------
@@ -52,6 +60,7 @@ function seedData(): AppData {
     attempts: [],
     nextWordId: words.length + 1,
     nextAttemptId: 1,
+    disabledCategories: [],
   }
 }
 
@@ -84,6 +93,7 @@ function normalize(d: Partial<AppData>): AppData {
     attempts,
     nextWordId: d.nextWordId ?? maxId(words) + 1,
     nextAttemptId: d.nextAttemptId ?? maxId(attempts) + 1,
+    disabledCategories: d.disabledCategories ?? [],
   }
 }
 
@@ -146,6 +156,25 @@ export function addWord(input: { english: string; finnish: string; category?: st
   return word
 }
 
+// Add several words in one write (the Add Vocabulary bulk save).
+export function addWords(
+  inputs: { english: string; finnish: string; category?: string | null }[],
+): void {
+  if (inputs.length === 0) return
+  const created = now()
+  for (const input of inputs) {
+    if (!input.english.trim() || !input.finnish.trim()) continue
+    data.words.push({
+      id: data.nextWordId++,
+      english: input.english.trim(),
+      finnish: input.finnish.trim(),
+      category: input.category?.trim() || null,
+      created_at: created,
+    })
+  }
+  persist()
+}
+
 export function updateWord(
   id: number,
   input: { english: string; finnish: string; category?: string | null },
@@ -164,16 +193,44 @@ export function deleteWord(id: number): void {
   persist()
 }
 
-export function getCategories(): { category: string; count: number }[] {
+export function getCategories(
+  opts: { includeDisabled?: boolean } = {},
+): { category: string; count: number }[] {
   // Distinct non-empty categories, ordered by first appearance (min word id).
+  const { includeDisabled = true } = opts
+  const disabled = new Set(data.disabledCategories)
   const order: string[] = []
   const counts = new Map<string, number>()
   for (const w of data.words.slice().sort((a, b) => a.id - b.id)) {
     if (!w.category) continue
+    if (!includeDisabled && disabled.has(w.category)) continue
     if (!counts.has(w.category)) order.push(w.category)
     counts.set(w.category, (counts.get(w.category) ?? 0) + 1)
   }
   return order.map((category) => ({ category, count: counts.get(category)! }))
+}
+
+// ---------------------------------------------------------------------------
+// Disabled categories — hide a category from Practice + Progress (view-only;
+// the words stay in the store and remain available in the Vocabulary list and
+// Study modes). Keyed by category display key (see categoryKey).
+// ---------------------------------------------------------------------------
+
+export function getDisabledCategories(): string[] {
+  return data.disabledCategories.slice()
+}
+
+export function isCategoryDisabled(category: string): boolean {
+  return data.disabledCategories.includes(category)
+}
+
+export function setCategoryDisabled(category: string, disabled: boolean): void {
+  const has = data.disabledCategories.includes(category)
+  if (disabled === has) return
+  data.disabledCategories = disabled
+    ? [...data.disabledCategories, category]
+    : data.disabledCategories.filter((c) => c !== category)
+  persist()
 }
 
 // ---------------------------------------------------------------------------
@@ -235,8 +292,11 @@ export function getPractice(opts: {
   const { exclude = null, category = null, mode = 'all' } = opts
   const nowMs = Date.now()
 
+  // When no category is pinned, skip words in disabled categories. An explicit
+  // category (e.g. Study → Typed recall) overrides, so hidden decks still work.
+  const disabled = new Set(data.disabledCategories)
   const rows = data.words
-    .filter((w) => (category ? w.category === category : true))
+    .filter((w) => (category ? w.category === category : !disabled.has(categoryKey(w.category))))
     .map((w) => {
       const recent = recentAttempts(w.id)
       const days_since = recent.length
@@ -343,11 +403,17 @@ function recentSummaries(): RecentSummary[] {
 }
 
 export function getStats(): Stats {
+  // Hidden categories are excluded everywhere on the Progress dashboard.
+  const disabled = new Set(data.disabledCategories)
+  const isHidden = (w: StoredWord) => disabled.has(categoryKey(w.category))
+  const hiddenWordIds = new Set(data.words.filter(isHidden).map((w) => w.id))
+
   // Daily rollup over the last 90 days.
   const cutoff90 = daysAgoTs(90)
   const dailyMap = new Map<string, DailyPoint>()
   for (const a of data.attempts) {
     if (parseTs(a.attempted_at) < cutoff90) continue
+    if (hiddenWordIds.has(a.word_id)) continue
     const day = a.attempted_at.slice(0, 10)
     const point = dailyMap.get(day) ?? { day, attempts: 0, correct: 0 }
     point.attempts++
@@ -356,7 +422,7 @@ export function getStats(): Stats {
   }
   const daily = [...dailyMap.values()].sort((a, b) => a.day.localeCompare(b.day))
 
-  const summaries = recentSummaries()
+  const summaries = recentSummaries().filter((s) => !isHidden(s.word))
   const cutoff30 = daysAgoTs(30)
   const cutoff60 = daysAgoTs(60)
 
@@ -416,15 +482,19 @@ export function dataSize(): number {
 }
 
 // Replace all data with an imported payload. Recomputes id counters defensively.
-export function importData(payload: { words?: unknown; attempts?: unknown }): void {
+export function importData(payload: { words?: unknown; attempts?: unknown; disabledCategories?: unknown }): void {
   const words = (payload.words ?? []) as StoredWord[]
   const attempts = (payload.attempts ?? []) as Attempt[]
+  const disabledCategories = Array.isArray(payload.disabledCategories)
+    ? (payload.disabledCategories as string[]).filter((c) => typeof c === 'string')
+    : []
   data = {
     version: DATA_VERSION,
     words,
     attempts,
     nextWordId: maxId(words) + 1,
     nextAttemptId: maxId(attempts) + 1,
+    disabledCategories,
   }
   persist()
   // The imported file IS a backup, so the restored state is already "saved".

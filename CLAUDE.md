@@ -39,7 +39,7 @@ src/
   App.tsx           # Onboarding gate (first-run Welcome) + backup-reminder banner; requests persistent storage on mount
   lib/
     store.ts        # THE DATA LAYER — localStorage-backed words/attempts; all read/write/query logic + backup bookkeeping (see Data store)
-    ai.ts           # Browser-side AI answer check (@anthropic-ai/sdk, dangerouslyAllowBrowser)
+    ai.ts           # Browser-side AI: answer check (Haiku) + bulk vocab generation (generateVocabulary, Sonnet, structured tool output) — both @anthropic-ai/sdk, dangerouslyAllowBrowser
     apiKey.ts       # get/set/clear the Anthropic key in localStorage
     backup.ts       # downloadBackup() — serialise data to a JSON file + mark backed up (shared by Settings + banner)
     storage.ts      # Storage-durability helpers (navigator.storage.persist/persisted/estimate)
@@ -49,7 +49,8 @@ src/
     Settings.tsx    # Manage the API key + export/import data JSON + storage-durability panel (persistence, usage, last backup)
     Home.tsx        # Landing page with nav cards
     Practice.tsx    # Typing practice session (category filter; accepts ?category= from the Study hub)
-    Words.tsx       # Vocabulary management, grouped by category (add / edit / delete / stats); each category has a "Study →" button → Study hub
+    Words.tsx       # Vocabulary management, grouped by category (edit / delete / stats); each category card has a "Study →" button → Study hub and an eye toggle to hide it from Practice + Progress (see Disabling categories). Adding words lives on a separate page via the "+ Add vocabulary" button
+    AddWords.tsx    # Add Vocabulary page (/words/add): AI bulk flow (paste English list → generateVocabulary → editable review table with duplicate flagging → addWords) plus a manual single-add form. Reached from the Vocabulary page button
     Study.tsx       # Per-category study hub: picks an exercise mode (Flashcards / Matching / Typed recall / Multiple choice). Reached as /study?category=<name>; /study with no category redirects to Words
     Flashcards.tsx  # Per-category flashcard deck (flip / shuffle / direction toggle); study-only. Launched from the Study hub; /flashcards with no category redirects to Words
     Matching.tsx    # Per-category matching game (tap Finnish ↔ English, rounds of 6); study-only. Launched from the Study hub
@@ -106,8 +107,9 @@ All data lives in `localStorage` and is read/written through `store.ts` — the 
 | Function | Notes |
 |----------|-------|
 | `getWords()` | Words joined with per-word attempt stats (total, correct count, last tried), ordered by id |
-| `addWord` / `updateWord` / `deleteWord` | `deleteWord` cascades to the word's attempts |
-| `getCategories()` | Distinct non-empty categories + counts, in insertion (min-id) order |
+| `addWord` / `addWords` / `updateWord` / `deleteWord` | `addWords` is a single-persist batch insert (Add Vocabulary bulk save); `deleteWord` cascades to the word's attempts |
+| `getCategories({includeDisabled?})` | Distinct non-empty categories + counts, in insertion (min-id) order; pass `includeDisabled: false` to drop hidden ones |
+| `getDisabledCategories` / `isCategoryDisabled` / `setCategoryDisabled` | Hidden-category set (see Disabling categories) — persisted in `AppData.disabledCategories`, travels with export/import |
 | `getPractice({exclude?, category?, mode?})` | Weighted random word + random direction; `null` if the pool is empty (see weighting below) |
 | `recordAttempt({word_id, direction, correct})` | Appends an attempt |
 | `getStats()` | `{ daily, struggling, knownWell, categoryAccuracy }` for the Progress page |
@@ -194,6 +196,21 @@ ACCURACY_UNSEEN = 3     // score for a word never attempted
 - After first run the user's `localStorage` is authoritative — there is no re-seed, so manual edits/categories in the UI persist and are never overwritten.
 - The Vocabulary page groups words into collapsible category cards; the Study hub, its exercise modes, and the Practice category filter all build their lists from these categories.
 - To add words to an existing browser: add them via the Vocabulary UI (any category, including a new one). To change the bundled starter set new users get: edit the markdown and run `npm run seed:generate`.
+
+## Disabling categories
+
+A category can be hidden from **Practice and Progress** via the eye toggle on its Vocabulary card (the words stay in the store and remain fully editable; Study modes still work if opened directly). The hidden set is stored as `AppData.disabledCategories` (an array of display keys — Uncategorised words use the literal `'Uncategorised'`, via `categoryKey()` in `store.ts`) so it's included in export/import backups. Filtering:
+
+- `getPractice()` excludes hidden categories **only when no category is pinned** (`category === null`) — an explicit category (e.g. Study → Typed recall, or the Practice dropdown) overrides, so a hidden deck still works when opened directly.
+- `getStats()` excludes hidden words from the daily rollup and every summary-derived section.
+- The Practice category dropdown uses `getCategories({ includeDisabled: false })`, but keeps a deep-linked hidden category as an option so the select isn't blank.
+
+## Adding vocabulary (AI-assisted)
+
+The **Add Vocabulary page** (`AddWords.tsx`, `/words/add`) is the entry point for adding words — the Vocabulary page no longer has an inline form, just a "+ Add vocabulary" button. Two ways to add:
+
+- **AI bulk:** paste an English list (one per line, ≤ `MAX_GENERATE_ITEMS` = 100). `generateVocabulary()` (`ai.ts`) sends the list **plus the user's existing category names** to Claude **Sonnet** (`claude-sonnet-4-6`) using a forced `save_translations` tool call (structured output; system prompt prompt-cached). For each item it returns `{ english, finnish, category, categoryIsNew }` — Finnish in nominative base form with ` / ` alternatives, reusing an existing category where one fits or flagging a new one. Results land in an **editable review table** (ChipEditor for english/finnish, category input, include checkbox); rows whose English already exists are badged "Already exists" and **unticked by default**. "Add N words" commits the ticked rows via `store.addWords()`. Requires an API key (gated, with a Settings link).
+- **Manual single-add:** the old inline form, moved here — adds one word directly via `addWord`, no API call.
 
 ## Planned features (not yet built)
 

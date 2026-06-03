@@ -6,6 +6,7 @@ import { requestPersistence } from './lib/storage'
 import Home from './pages/Home'
 import Practice from './pages/Practice'
 import Words from './pages/Words'
+import AddWords from './pages/AddWords'
 import Grammar from './pages/Grammar'
 import Flashcards from './pages/Flashcards'
 import Study from './pages/Study'
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/practice" element={<Practice />} />
         <Route path="/words" element={<Words />} />
+        <Route path="/words/add" element={<AddWords />} />
         <Route path="/flashcards" element={<Flashcards />} />
         <Route path="/study" element={<Study />} />
         <Route path="/matching" element={<Matching />} />
