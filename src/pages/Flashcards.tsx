@@ -36,40 +36,55 @@ export default function Flashcards() {
 function Deck({ label, category, words }: { label: string; category: string; words: Word[] }) {
   const studyHref = `/study?category=${encodeURIComponent(category)}`
   const [direction, setDirection] = useState<Direction>('fi_to_en')
-  const [order, setOrder] = useState<number[]>(() => words.map((_, i) => i))
-  const [pos, setPos] = useState(0)
+  const allIdx = useMemo(() => words.map((_, i) => i), [words])
+
+  // A session is a queue of remaining card indices. "Got it" drops a card; "Still learning"
+  // sends it to the back so it comes around again. The session ends when the queue empties.
+  // Study-only — no attempts are recorded.
+  const [queue, setQueue] = useState<number[]>(() => shuffle(allIdx))
   const [flipped, setFlipped] = useState(false)
+  const [doneCount, setDoneCount] = useState(0) // cards cleared with "Got it"
+  const [struggledIdx, setStruggledIdx] = useState<Set<number>>(new Set()) // ever marked "Still learning"
 
-  const card = words[order[pos]]
+  const current = queue[0]
+  const card = words[current]
+  const total = words.length
+  const finished = total > 0 && queue.length === 0
 
-  const go = useCallback(
-    (delta: number) => {
-      setFlipped(false)
-      setPos(p => (p + delta + order.length) % order.length)
-    },
-    [order.length],
-  )
-
-  const reshuffle = useCallback(() => {
-    setOrder(shuffle(words.map((_, i) => i)))
-    setPos(0)
+  const start = useCallback((indices: number[]) => {
+    setQueue(shuffle(indices))
+    setDoneCount(0)
+    setStruggledIdx(new Set())
     setFlipped(false)
-  }, [words])
+  }, [])
+
+  const gotIt = useCallback(() => {
+    setDoneCount(c => c + 1)
+    setQueue(q => q.slice(1))
+    setFlipped(false)
+  }, [])
+
+  const stillLearning = useCallback(() => {
+    setStruggledIdx(prev => new Set(prev).add(current))
+    setQueue(q => (q.length > 1 ? [...q.slice(1), q[0]] : q)) // move to the back
+    setFlipped(false)
+  }, [current])
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
+      if (finished || !card) return
       if (e.key === ' ' || e.key === 'Enter') {
         e.preventDefault()
         setFlipped(f => !f)
-      } else if (e.key === 'ArrowRight') {
-        go(1)
-      } else if (e.key === 'ArrowLeft') {
-        go(-1)
+        return
       }
+      if (!flipped) return // sort keys only act on a flipped (answered) card
+      if (e.key === 'ArrowRight') gotIt()
+      else if (e.key === 'ArrowLeft') stillLearning()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [go])
+  }, [finished, card, flipped, gotIt, stillLearning])
 
   const front = useMemo(() => {
     if (!card) return []
@@ -92,6 +107,53 @@ function Deck({ label, category, words }: { label: string; category: string; wor
     )
   }
 
+  if (finished) {
+    const struggled = struggledIdx.size
+    const firstTry = total - struggled
+    return (
+      <div className="min-h-screen bg-base flex flex-col items-center p-8">
+        <div className="w-full max-w-2xl">
+          <div className="bg-surface rounded-xl border border-line shadow-lg p-10 text-center">
+            <div className="text-h2 mb-3">{struggled === 0 ? '🎉' : '👍'}</div>
+            <h2 className="text-h4 font-display font-bold text-ink mb-2">Deck complete!</h2>
+            <p className="text-ink-muted mb-8">
+              You knew <span className="text-ink font-semibold tabular-nums">{firstTry}</span> of{' '}
+              <span className="text-ink font-semibold tabular-nums">{total}</span> on the first look
+              {struggled > 0 && <> — {struggled} needed another pass.</>}
+              {struggled === 0 && <> — flawless.</>}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              {struggled > 0 && (
+                <button
+                  onClick={() => start([...struggledIdx])}
+                  className="px-6 py-3 rounded-lg bg-accent text-on-accent font-semibold hover:bg-accent-hover active:scale-95 transition-all"
+                >
+                  Review the {struggled} tricky one{struggled === 1 ? '' : 's'}
+                </button>
+              )}
+              <button
+                onClick={() => start(allIdx)}
+                className={`px-6 py-3 rounded-lg font-semibold active:scale-95 transition-all ${
+                  struggled > 0
+                    ? 'bg-surface border-2 border-line text-ink-muted hover:border-line-strong'
+                    : 'bg-accent text-on-accent hover:bg-accent-hover'
+                }`}
+              >
+                Shuffle all again
+              </button>
+              <Link
+                to={studyHref}
+                className="px-6 py-3 rounded-lg bg-surface border-2 border-line text-ink-muted font-semibold hover:border-line-strong transition-all"
+              >
+                Other modes
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   const frontLang = direction === 'fi_to_en' ? 'Finnish' : 'English'
   const backLang = direction === 'fi_to_en' ? 'English' : 'Finnish'
 
@@ -99,16 +161,25 @@ function Deck({ label, category, words }: { label: string; category: string; wor
     <div className="min-h-screen bg-base flex flex-col items-center p-8">
       <div className="w-full max-w-2xl">
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <Link to={studyHref} className="text-sm text-accent hover:underline">← Study</Link>
-          <span className="font-semibold text-ink">{label}</span>
+        <div className="flex items-center justify-between mb-2 gap-3">
+          <Link to={studyHref} className="text-sm text-accent hover:underline shrink-0">← Study</Link>
+          <span className="font-semibold text-ink truncate">{label}</span>
           <button
             onClick={() => { setDirection(d => d === 'fi_to_en' ? 'en_to_fi' : 'fi_to_en'); setFlipped(false) }}
-            className="text-sm px-3 py-1.5 rounded-sm bg-surface border border-line text-ink-muted hover:border-line-strong transition-colors"
+            className="text-sm px-3 py-1.5 rounded-sm bg-surface border border-line text-ink-muted hover:border-line-strong transition-colors shrink-0"
           >
             {frontLang} → {backLang}
           </button>
         </div>
+
+        {/* Progress */}
+        <div className="h-1.5 bg-inset rounded-full overflow-hidden mb-2">
+          <div
+            className="h-full bg-accent transition-all duration-300"
+            style={{ width: `${(doneCount / total) * 100}%` }}
+          />
+        </div>
+        <p className="text-center text-sm text-ink-faint mb-6 tabular-nums">{queue.length} to go</p>
 
         {/* Card */}
         <button
@@ -129,28 +200,26 @@ function Deck({ label, category, words }: { label: string; category: string; wor
           {!flipped && <span className="text-sm text-ink-faint mt-6">Click or press Space to flip</span>}
         </button>
 
-        {/* Controls */}
+        {/* Self-assessment — only once the answer is showing */}
         <div className="flex items-center justify-between gap-4">
           <button
-            onClick={() => go(-1)}
-            className="px-5 py-3 rounded-lg bg-surface border-2 border-line text-ink-muted font-semibold hover:border-line-strong active:scale-95 transition-all"
+            onClick={stillLearning}
+            disabled={!flipped}
+            className="flex-1 px-5 py-3 rounded-lg bg-surface border-2 border-warning text-warning font-semibold hover:bg-warning-subtle active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            ← Prev
+            ← Still learning
           </button>
-          <div className="flex flex-col items-center gap-1">
-            <span className="text-ink-faint text-sm tabular-nums">{pos + 1} / {words.length}</span>
-            <button onClick={reshuffle} className="text-xs text-accent hover:underline">Shuffle</button>
-          </div>
           <button
-            onClick={() => go(1)}
-            className="px-5 py-3 rounded-lg bg-accent text-on-accent font-semibold hover:bg-accent-hover active:scale-95 transition-all"
+            onClick={gotIt}
+            disabled={!flipped}
+            className="flex-1 px-5 py-3 rounded-lg bg-surface border-2 border-success text-success font-semibold hover:bg-success-subtle active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Next →
+            Got it →
           </button>
         </div>
 
         <p className="text-center text-sm text-ink-faint mt-6">
-          Space / Enter to flip · ← → to navigate
+          {flipped ? '← Still learning · Got it →' : 'Space / Enter to flip'}
         </p>
       </div>
     </div>

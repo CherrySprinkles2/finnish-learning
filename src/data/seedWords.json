@@ -1,0 +1,3682 @@
+[
+  {
+    "english": "Hi! / Hello! / hey",
+    "finnish": "Hei!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "and",
+    "finnish": "ja",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Welcome! / welcome",
+    "finnish": "Tervetuloa!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Excuse me! / Sorry! / sorry",
+    "finnish": "Anteeksi!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "here",
+    "finnish": "täällä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Finnish course",
+    "finnish": "suomen kurssi / suomenkurssi",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "yes (informal)",
+    "finnish": "joo",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "to be",
+    "finnish": "olla",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "this",
+    "finnish": "tämä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "place / seat",
+    "finnish": "paikka",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "free / available",
+    "finnish": "vapaa",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "nice / fun",
+    "finnish": "kiva / hauska",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "I",
+    "finnish": "minä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "who",
+    "finnish": "kuka",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "you",
+    "finnish": "sinä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Nice to meet you!",
+    "finnish": "Hauska tutustua!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Thank you, likewise!",
+    "finnish": "Kiitos samoin! / kiitos, samoin!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Hi! / Bye! (informal) / hi",
+    "finnish": "Moi!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "How are you? / What's up?",
+    "finnish": "Mitä kuuluu?",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Hi! / Hello! (informal)",
+    "finnish": "Terve!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Thank you!",
+    "finnish": "Kiitos!",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "I'm doing well.",
+    "finnish": "Minulle kuuluu hyvää.",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "And you? / What about you?",
+    "finnish": "Entä sinulle?",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "Just fine, thanks. / quite good, thank you",
+    "finnish": "Ihan hyvää, kiitos.",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "here (nearby)",
+    "finnish": "tässä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "my",
+    "finnish": "minun",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "name",
+    "finnish": "nimi",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "teacher",
+    "finnish": "opettaja",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "How do you spell/write it? / How do you spell it?",
+    "finnish": "Miten se kirjoitetaan?",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "first name",
+    "finnish": "etunimi",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "last name / surname",
+    "finnish": "sukunimi",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "okay",
+    "finnish": "okei",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "course day",
+    "finnish": "kurssipäivä",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "clock / o'clock",
+    "finnish": "kello",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "is there / is (question) / is?",
+    "finnish": "onko / onko?",
+    "category": "Kappale 1"
+  },
+  {
+    "english": "is there / is (question) / is?",
+    "finnish": "onko",
+    "category": ""
+  },
+  {
+    "english": "homework",
+    "finnish": "kotitehtävät / kotitehtävä",
+    "category": ""
+  },
+  {
+    "english": "fizzy drink / soda",
+    "finnish": "limsa / limonadi",
+    "category": ""
+  },
+  {
+    "english": "cycle path / bike road",
+    "finnish": "pyörätie",
+    "category": ""
+  },
+  {
+    "english": "of what nationality / from which country",
+    "finnish": "minkämaalainen",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to end / to run out",
+    "finnish": "loppua",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "other",
+    "finnish": "muu",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "student",
+    "finnish": "opiskelija",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to go",
+    "finnish": "mennä",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "home",
+    "finnish": "koti",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "but",
+    "finnish": "mutta",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "kiosk / newsstand",
+    "finnish": "kioski",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to buy",
+    "finnish": "ostaa",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "ice cream",
+    "finnish": "jäätelö",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to cost / to pay",
+    "finnish": "maksaa",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "euro",
+    "finnish": "euro",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "no / not",
+    "finnish": "ei",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "because",
+    "finnish": "koska",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to save (money)",
+    "finnish": "säästää",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "money",
+    "finnish": "raha",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "then / next",
+    "finnish": "sitten",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to sit",
+    "finnish": "istua",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "park",
+    "finnish": "puisto",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to speak / to talk",
+    "finnish": "puhua",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to laugh",
+    "finnish": "nauraa",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Brazilian",
+    "finnish": "brasilialainen",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Russian",
+    "finnish": "venäläinen",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "from where",
+    "finnish": "mistä",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "originally from",
+    "finnish": "kotoisin",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "South Africa",
+    "finnish": "Etelä-Afrikka",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Oh really! / Is that so!",
+    "finnish": "Ai jaa!",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "language",
+    "finnish": "kieli",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "mother tongue / native language",
+    "finnish": "äidinkieli",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "also / too",
+    "finnish": "myös",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "a little / a bit",
+    "finnish": "vähän",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Spanish",
+    "finnish": "espanja",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "I don't speak",
+    "finnish": "en puhu / minä en puhu",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Brazil",
+    "finnish": "Brasilia",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Portuguese",
+    "finnish": "portugali",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "Oh right! / I see! / ah is that so",
+    "finnish": "Ai niin!",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "true / really",
+    "finnish": "totta",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to drive",
+    "finnish": "ajaa",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "car",
+    "finnish": "auto",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "bus stop",
+    "finnish": "bussipysäkki / bussipysäkkiä",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "where",
+    "finnish": "missä",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to live",
+    "finnish": "asua",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "North Helsinki",
+    "finnish": "Pohjois-Helsinki",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "bus",
+    "finnish": "bussi",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "not ... but",
+    "finnish": "ei ... vaan",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "first",
+    "finnish": "ensin",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "metro / subway",
+    "finnish": "metro",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "now",
+    "finnish": "nyt",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to come",
+    "finnish": "tulla",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "English",
+    "finnish": "englanti",
+    "category": "Kappale 2"
+  },
+  {
+    "english": "to call / to play (instrument)",
+    "finnish": "soittaa",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "friend",
+    "finnish": "ystävä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "video call",
+    "finnish": "videopuhelu",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to be at work",
+    "finnish": "olla töissä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "already",
+    "finnish": "jo",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "not yet",
+    "finnish": "ei vielä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "only / just",
+    "finnish": "vasta",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "half",
+    "finnish": "puoli",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "Oh right, true. / Ah thats true",
+    "finnish": "Ai niin, totta.",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "weather",
+    "finnish": "sää",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "quite / time",
+    "finnish": "aika",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "bad",
+    "finnish": "huono",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "It's pouring with rain.",
+    "finnish": "Sataa kaatamalla.",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "It's windy.",
+    "finnish": "On tuulista. / on tuulinen",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "Oh! / Wow!",
+    "finnish": "Aijaa!",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "The sun is shining. / The sun is shining",
+    "finnish": "Aurinko paistaa.",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "really / very",
+    "finnish": "tosi",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "warm",
+    "finnish": "lämmin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "degree",
+    "finnish": "aste",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "night",
+    "finnish": "yö",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "so / that way",
+    "finnish": "niin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "bright / light",
+    "finnish": "valoisa",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "that (conjunction)",
+    "finnish": "että",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "difficult / hard",
+    "finnish": "vaikea",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to sleep",
+    "finnish": "nukkua",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to enjoy",
+    "finnish": "nauttia",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "dark",
+    "finnish": "pimeä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "Well yes, apparently so!",
+    "finnish": "No joo, niin kulemma!",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "do you have",
+    "finnish": "onko sinulla",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "workplace / job",
+    "finnish": "työpaikka",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to look for work",
+    "finnish": "etsiä töitä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "easy",
+    "finnish": "helppo",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "That's great!",
+    "finnish": "Hieno juttu!",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "what kind of",
+    "finnish": "millainen",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "nice / pleasant / comfortable",
+    "finnish": "mukava",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "same",
+    "finnish": "sama",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "on Mondays",
+    "finnish": "maanantaisin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "on Wednesdays",
+    "finnish": "keskiviikkoisin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "on Thursdays",
+    "finnish": "torstaisin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "time / occasion",
+    "finnish": "kerta",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "Oh! / Wow!",
+    "finnish": "Ohhoh!",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "as well as",
+    "finnish": "yhtä hyvin kuin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "I suppose so. / Probably.",
+    "finnish": "Niin varmaan.",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "still / yet",
+    "finnish": "vielä",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "student apartment",
+    "finnish": "opiskelija-asunto / opiskelijanasunto",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to move",
+    "finnish": "muuttaa",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "our",
+    "finnish": "meidän",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "new",
+    "finnish": "uusi",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "That sounds good.",
+    "finnish": "Kuulostaa hyvältä.",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "I have to / I must",
+    "finnish": "minun täytyy",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to leave for work / to go to work",
+    "finnish": "lähteä töihin",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "Greetings to Hanna!",
+    "finnish": "Terveisiä Hannalle!",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "to tell",
+    "finnish": "kertoa",
+    "category": "Kappale 3"
+  },
+  {
+    "english": "married",
+    "finnish": "naimisissa",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "with (someone)",
+    "finnish": "G + kanssa",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "to love (someone)",
+    "finnish": "rakastaa + P / rakastaa",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "we have",
+    "finnish": "meillä on",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "child",
+    "finnish": "lapsi",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "cute",
+    "finnish": "söpö",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "4 years old",
+    "finnish": "4-vuotias",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "girl",
+    "finnish": "tyttö",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "bus driver",
+    "finnish": "bussikuski",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "I don't have",
+    "finnish": "minulla ei ole",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "to look for (something)",
+    "finnish": "etsiä + P / etsiä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "slim / slender",
+    "finnish": "hoikka",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "to like (something) / to like X",
+    "finnish": "pitää + sta/stä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "sports / exercise",
+    "finnish": "urheilu",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "calm / peaceful",
+    "finnish": "rauhallinen",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "maybe / perhaps",
+    "finnish": "ehkä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "shy",
+    "finnish": "ujo",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "divorced",
+    "finnish": "eronnut",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "single",
+    "finnish": "sinkku",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "family",
+    "finnish": "perhe",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "family / relatives / clan",
+    "finnish": "suku",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "little sister",
+    "finnish": "pikkusisko",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "big brother",
+    "finnish": "isoveli",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "aunt",
+    "finnish": "täti",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "uncle",
+    "finnish": "setä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "cousin",
+    "finnish": "serkku",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "person from Helsinki",
+    "finnish": "helsinkiläinen / helsinkilainen",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "house / building",
+    "finnish": "talo",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "floor / storey",
+    "finnish": "kerros",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "room",
+    "finnish": "huone",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "kitchen",
+    "finnish": "keittiö",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "talkative",
+    "finnish": "puhelias",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "happy / cheerful",
+    "finnish": "iloinen",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "black",
+    "finnish": "musta",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "curly",
+    "finnish": "kihara",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "dark (colour)",
+    "finnish": "tumma",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "girlfriend",
+    "finnish": "tyttöystävä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "shop / store",
+    "finnish": "kauppa",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "we don't have",
+    "finnish": "meillä ei ole",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "bike / bicycle",
+    "finnish": "pyörä / polkupyörä",
+    "category": "Kappale 4"
+  },
+  {
+    "english": "alarm clock",
+    "finnish": "herätyskello",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to ring / to sound",
+    "finnish": "soida",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to take a shower",
+    "finnish": "käydä suihkussa",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to get dressed",
+    "finnish": "pukea päälle",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "after that",
+    "finnish": "sen jälkeen",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "breakfast",
+    "finnish": "aamupala",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "newspaper / magazine / leaf",
+    "finnish": "lehti",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "together",
+    "finnish": "yhdessä",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "usually / generally",
+    "finnish": "yleensä",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "cereal (flakes)",
+    "finnish": "muroja",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "bread",
+    "finnish": "leipä",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "nothing",
+    "finnish": "ei mitään",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "only / just",
+    "finnish": "vain",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "coffee",
+    "finnish": "kahvi",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "lunch restaurant",
+    "finnish": "lounasravintola",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "cook / chef",
+    "finnish": "kokki",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to cook (food)",
+    "finnish": "tehdä ruokaa",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "work colleague",
+    "finnish": "työkaveri",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "daycare / kindergarten",
+    "finnish": "päiväkoti",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "pharmacy",
+    "finnish": "apteekki",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "school",
+    "finnish": "koulu",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "at two (o'clock)",
+    "finnish": "kahdelta = kello kaksi",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "friend / buddy",
+    "finnish": "kaveri",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "football / soccer",
+    "finnish": "jalkapallo",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "in the evenings / evenings",
+    "finnish": "iltaisin",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "something",
+    "finnish": "jotain",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "indoor swimming pool / swimming hall",
+    "finnish": "uimahalli",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "hour / lesson",
+    "finnish": "tunti",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "shoe",
+    "finnish": "kenkä",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to choose / to select",
+    "finnish": "valita",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "sandals",
+    "finnish": "sandaalit",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "tired",
+    "finnish": "väsynyt",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "book",
+    "finnish": "kirja",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "at nine (o'clock)",
+    "finnish": "yhdeksältä = kello yhdeksän / yhdeksältä",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to brush teeth",
+    "finnish": "pestä hampaat",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "to go to sleep",
+    "finnish": "mennä nukkumaan",
+    "category": "Kappale 5"
+  },
+  {
+    "english": "road",
+    "finnish": "tie",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "apartment building",
+    "finnish": "kerrostalo",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "cellar / basement",
+    "finnish": "kellari",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "yard",
+    "finnish": "piha",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "street",
+    "finnish": "katu",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "stair / step",
+    "finnish": "porras",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "staircase / stairwell",
+    "finnish": "rappu",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "children's room",
+    "finnish": "lastenhuone",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "bedroom",
+    "finnish": "makuuhuone",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "living room",
+    "finnish": "olohuone",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "balcony",
+    "finnish": "parveke",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "wall",
+    "finnish": "seinä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "floor",
+    "finnish": "lattia",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "desk / writing table",
+    "finnish": "kirjoituspöytä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "office chair",
+    "finnish": "työtuoli",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "nightstand / bedside table",
+    "finnish": "yöpöytä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "coffee table",
+    "finnish": "sohvapöytä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "bookshelf",
+    "finnish": "kirjahylly",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "photograph",
+    "finnish": "valokuva",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "box / drawer",
+    "finnish": "laatikko",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "toy",
+    "finnish": "lelu",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "toy box",
+    "finnish": "lelulaatikko",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "high / tall",
+    "finnish": "korkea",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "low",
+    "finnish": "matala",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "wide",
+    "finnish": "leveä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "large / big",
+    "finnish": "suuri",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "soft",
+    "finnish": "pehmeä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "neighbour",
+    "finnish": "naapuri",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "resident / occupant",
+    "finnish": "asukas",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "maintenance man",
+    "finnish": "huoltomies",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "maintenance company",
+    "finnish": "huoltoyhtiö",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "problem",
+    "finnish": "ongelma",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "tap / faucet",
+    "finnish": "vesihana",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "broken",
+    "finnish": "rikki",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "fault / defect",
+    "finnish": "vika",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "to leak",
+    "finnish": "vuotaa",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "properly",
+    "finnish": "kunnolla",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "closed / shut",
+    "finnish": "kiinni",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "open",
+    "finnish": "auki",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "to fit / to suit / to agree",
+    "finnish": "sopia",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "to carry",
+    "finnish": "kantaa",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "out / outside",
+    "finnish": "ulos",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "in / inside",
+    "finnish": "sisään",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "up",
+    "finnish": "ylös",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "woman",
+    "finnish": "nainen",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "lunch",
+    "finnish": "lounas",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "delivery van",
+    "finnish": "pakettiauto",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "all clear / got it",
+    "finnish": "selvä juttu",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "all the time",
+    "finnish": "koko ajan",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "that",
+    "finnish": "tuo",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "it / that",
+    "finnish": "se",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "these",
+    "finnish": "nämä",
+    "category": "Kappale 6"
+  },
+  {
+    "english": "spring",
+    "finnish": "kevät",
+    "category": "Seasons"
+  },
+  {
+    "english": "summer",
+    "finnish": "kesä",
+    "category": "Seasons"
+  },
+  {
+    "english": "autumn / fall",
+    "finnish": "syksy",
+    "category": "Seasons"
+  },
+  {
+    "english": "winter",
+    "finnish": "talvi",
+    "category": "Seasons"
+  },
+  {
+    "english": "January",
+    "finnish": "tammikuu",
+    "category": "Months"
+  },
+  {
+    "english": "February",
+    "finnish": "helmikuu",
+    "category": "Months"
+  },
+  {
+    "english": "March",
+    "finnish": "maaliskuu",
+    "category": "Months"
+  },
+  {
+    "english": "April",
+    "finnish": "huhtikuu",
+    "category": "Months"
+  },
+  {
+    "english": "May",
+    "finnish": "toukokuu",
+    "category": "Months"
+  },
+  {
+    "english": "June",
+    "finnish": "kesäkuu",
+    "category": "Months"
+  },
+  {
+    "english": "July",
+    "finnish": "heinäkuu",
+    "category": "Months"
+  },
+  {
+    "english": "August",
+    "finnish": "elokuu",
+    "category": "Months"
+  },
+  {
+    "english": "September",
+    "finnish": "syyskuu",
+    "category": "Months"
+  },
+  {
+    "english": "October",
+    "finnish": "lokakuu",
+    "category": "Months"
+  },
+  {
+    "english": "November",
+    "finnish": "marraskuu",
+    "category": "Months"
+  },
+  {
+    "english": "December",
+    "finnish": "joulukuu",
+    "category": "Months"
+  },
+  {
+    "english": "Monday",
+    "finnish": "maanantai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Tuesday",
+    "finnish": "tiistai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Wednesday",
+    "finnish": "keskiviikko",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Thursday",
+    "finnish": "torstai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Friday",
+    "finnish": "perjantai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Saturday",
+    "finnish": "lauantai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "Sunday",
+    "finnish": "sunnuntai",
+    "category": "Days of the Week"
+  },
+  {
+    "english": "to be able to / can",
+    "finnish": "voida",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to get / to receive",
+    "finnish": "saada",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to know (a fact)",
+    "finnish": "tietää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to see",
+    "finnish": "nähdä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to give",
+    "finnish": "antaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to take",
+    "finnish": "ottaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to think",
+    "finnish": "ajatella",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to leave",
+    "finnish": "lähteä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to ask",
+    "finnish": "kysyä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to watch / to look",
+    "finnish": "katsoa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to need",
+    "finnish": "tarvita",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to want",
+    "finnish": "haluta",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to like / to hold",
+    "finnish": "pitää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to like (informal)",
+    "finnish": "tykätä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to love",
+    "finnish": "rakastaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to hate",
+    "finnish": "vihata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to know how to",
+    "finnish": "osata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to learn",
+    "finnish": "oppia",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to study",
+    "finnish": "opiskella",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to read",
+    "finnish": "lukea",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to write",
+    "finnish": "kirjoittaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to listen",
+    "finnish": "kuunnella",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to hear",
+    "finnish": "kuulla",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to understand",
+    "finnish": "ymmärtää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to remember",
+    "finnish": "muistaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to forget",
+    "finnish": "unohtaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to answer",
+    "finnish": "vastata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to ask for / to request",
+    "finnish": "pyytää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to discuss / to chat",
+    "finnish": "keskustella",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to eat",
+    "finnish": "syödä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to drink",
+    "finnish": "juoda",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to wake up",
+    "finnish": "herätä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to get up / to rise",
+    "finnish": "nousta",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to stand",
+    "finnish": "seisoa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to lie down",
+    "finnish": "maata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to walk",
+    "finnish": "kävellä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to run",
+    "finnish": "juosta",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to swim",
+    "finnish": "uida",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to play (sports / games)",
+    "finnish": "pelata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to play (as a child)",
+    "finnish": "leikkiä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to travel",
+    "finnish": "matkustaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to fly",
+    "finnish": "lentää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to arrive",
+    "finnish": "saapua",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to stay",
+    "finnish": "jäädä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to visit / to go to",
+    "finnish": "käydä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to meet",
+    "finnish": "tavata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to get to know",
+    "finnish": "tutustua",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to sell",
+    "finnish": "myydä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to order",
+    "finnish": "tilata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to reserve / to book",
+    "finnish": "varata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to put / to place",
+    "finnish": "laittaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to bring",
+    "finnish": "tuoda",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to take (somewhere)",
+    "finnish": "viedä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to open",
+    "finnish": "avata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to close",
+    "finnish": "sulkea",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to find",
+    "finnish": "löytää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to search / to look for",
+    "finnish": "etsiä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to take care of",
+    "finnish": "hoitaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to help",
+    "finnish": "auttaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to fix / to repair",
+    "finnish": "korjata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to clean",
+    "finnish": "siivota",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to wash",
+    "finnish": "pestä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to sing",
+    "finnish": "laulaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to draw",
+    "finnish": "piirtää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to paint",
+    "finnish": "maalata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to cry",
+    "finnish": "itkeä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to smile",
+    "finnish": "hymyillä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to fear",
+    "finnish": "pelätä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to feel / to know (a person)",
+    "finnish": "tuntea",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to live / to be alive",
+    "finnish": "elää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to be born",
+    "finnish": "syntyä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to die",
+    "finnish": "kuolla",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to count / to calculate",
+    "finnish": "laskea",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to lift",
+    "finnish": "nostaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to throw",
+    "finnish": "heittää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to borrow / to lend",
+    "finnish": "lainata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to try",
+    "finnish": "yrittää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to succeed",
+    "finnish": "onnistua",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to use",
+    "finnish": "käyttää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to decide",
+    "finnish": "päättää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to start / to begin",
+    "finnish": "alkaa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to happen",
+    "finnish": "tapahtua",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to be enough",
+    "finnish": "riittää",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to return",
+    "finnish": "palata",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to say",
+    "finnish": "sanoa",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "to do / to make",
+    "finnish": "tehdä",
+    "category": "Top 100 Finnish Verbs"
+  },
+  {
+    "english": "he / she / he/she",
+    "finnish": "hän",
+    "category": "Pronominit (Pronouns)"
+  },
+  {
+    "english": "we",
+    "finnish": "me",
+    "category": "Pronominit (Pronouns)"
+  },
+  {
+    "english": "you (plural / formal)",
+    "finnish": "te",
+    "category": "Pronominit (Pronouns)"
+  },
+  {
+    "english": "they",
+    "finnish": "he",
+    "category": "Pronominit (Pronouns)"
+  },
+  {
+    "english": "his / her",
+    "finnish": "hänen",
+    "category": "Pronominit (Pronouns)"
+  },
+  {
+    "english": "stretching",
+    "finnish": "venyttely",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "times",
+    "finnish": "kertaa",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "How...?",
+    "finnish": "Kuinka...?",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "See you tomorrow!",
+    "finnish": "Huomiseen!",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "base form / dictionary form / basic form",
+    "finnish": "perusmuoto",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "pronunciation",
+    "finnish": "ääntäminen",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "no problem / it doesn't matter",
+    "finnish": "ei haittaa / ei mitään",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "line / dash",
+    "finnish": "viiva",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "clear / understood",
+    "finnish": "selvä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "divided / shared",
+    "finnish": "jaettuna",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "When...?",
+    "finnish": "Milloin...?",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "others / the rest",
+    "finnish": "muut",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "help!",
+    "finnish": "apua / apua!",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "exercise / practice",
+    "finnish": "harjoitus",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "contact details / contact information",
+    "finnish": "yhteystiedot",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "break / pause",
+    "finnish": "tauko",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "sentence",
+    "finnish": "lause",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "alphabet",
+    "finnish": "aakkoset",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "phrases",
+    "finnish": "fraasit",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "answer",
+    "finnish": "vastaus",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "skill",
+    "finnish": "taito",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "mistake",
+    "finnish": "virhe",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "loan",
+    "finnish": "laina",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "hair",
+    "finnish": "hiukset",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "sticks / canes",
+    "finnish": "kepit",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "village",
+    "finnish": "kylä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "year",
+    "finnish": "vuosi",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "body / torso",
+    "finnish": "vartalo",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "nationality",
+    "finnish": "kansalaisuus",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "Easter",
+    "finnish": "pääsiäinen",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "sore throat",
+    "finnish": "kurkku kipeä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "city / town",
+    "finnish": "kaupunki",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "day",
+    "finnish": "päivä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "chapter / track",
+    "finnish": "kappale",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "laptop (informal)",
+    "finnish": "läppäri",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "month",
+    "finnish": "kuukausi",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "charger",
+    "finnish": "laturi",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "sea",
+    "finnish": "meri",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "introduction / presentation",
+    "finnish": "esittely",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "garden",
+    "finnish": "puutarha",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "hair (head, informal)",
+    "finnish": "tukka",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "at work",
+    "finnish": "töissä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "work / jobs",
+    "finnish": "töitä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "tail",
+    "finnish": "häntä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "cosy / comfortable",
+    "finnish": "viihtyisä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "with Pekka",
+    "finnish": "Pekan kanssa",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "advantage / benefit",
+    "finnish": "etu",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "to download / to charge",
+    "finnish": "ladata",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "to pour / to knock over",
+    "finnish": "kaataa",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "to think / to ponder",
+    "finnish": "miettiä",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "homework",
+    "finnish": "kotitehtävät",
+    "category": "Yleiset sanat (General vocabulary)"
+  },
+  {
+    "english": "always",
+    "finnish": "aina",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "often",
+    "finnish": "usein",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "sometimes",
+    "finnish": "joskus",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "rarely / seldom",
+    "finnish": "harvoin",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "never",
+    "finnish": "ei koskaan",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "immediately / right away",
+    "finnish": "heti",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "soon",
+    "finnish": "kohta",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "before / previously",
+    "finnish": "ennen",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "later",
+    "finnish": "myöhemmin",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "next",
+    "finnish": "ensi",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "a lot / much / many",
+    "finnish": "paljon",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "enough",
+    "finnish": "tarpeeksi",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "almost / nearly",
+    "finnish": "melkein",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "too / too much",
+    "finnish": "liian",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "really / truly",
+    "finnish": "todella",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "quickly / fast",
+    "finnish": "nopeasti",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "slowly",
+    "finnish": "hitaasti",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "anything / nothing",
+    "finnish": "mitään",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "that is / i.e. / that (to clarify something)",
+    "finnish": "eli",
+    "category": "Adverbit (Adverbs)"
+  },
+  {
+    "english": "fun / funny",
+    "finnish": "hauska",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "strong",
+    "finnish": "vahva",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "weak",
+    "finnish": "heikko",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "slow",
+    "finnish": "hidas",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "tall / long",
+    "finnish": "pitkä",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "short",
+    "finnish": "lyhyt",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "expensive",
+    "finnish": "kallis",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "cheap",
+    "finnish": "halpa",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "free (no cost)",
+    "finnish": "ilmainen",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "ugly",
+    "finnish": "ruma",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "happy",
+    "finnish": "onnellinen",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "cool (temperature)",
+    "finnish": "viileä",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "quiet / silent",
+    "finnish": "hiljainen",
+    "category": "Adjektiivit (Adjectives)"
+  },
+  {
+    "english": "north",
+    "finnish": "pohjoinen",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "south",
+    "finnish": "etelä",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "east",
+    "finnish": "itä",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "west",
+    "finnish": "länsi / lansi",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "middle / centre / center",
+    "finnish": "keski",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "forward / ahead / straight ahead",
+    "finnish": "eteenpäin",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "behind / at the back",
+    "finnish": "takana",
+    "category": "Suunnat (Directions)"
+  },
+  {
+    "english": "or (when both options are valid)",
+    "finnish": "tai",
+    "category": "Konjunktiot (Connectives)"
+  },
+  {
+    "english": "or (when only one answer is correct)",
+    "finnish": "vai",
+    "category": "Konjunktiot (Connectives)"
+  },
+  {
+    "english": "windy",
+    "finnish": "tuulinen",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "sunny",
+    "finnish": "aurinkoinen",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "cloudy",
+    "finnish": "pilvinen",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "it's foggy",
+    "finnish": "on sumuista",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "it's cloudy / it is cloudy",
+    "finnish": "on pilvistä",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "it's rainy",
+    "finnish": "on sateista",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "there's a storm / its stormy",
+    "finnish": "on myrsky",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "there's thunder",
+    "finnish": "on ukkonen",
+    "category": "Sää – lisää ilmaisuja (More weather expressions)"
+  },
+  {
+    "english": "t-shirt",
+    "finnish": "t-paita",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "shirt",
+    "finnish": "paita",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "sweater / jumper / wool jumper / wool sweater",
+    "finnish": "villapusero",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "coat / jacket",
+    "finnish": "takki",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "trousers / pants",
+    "finnish": "housut",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "jeans",
+    "finnish": "farkut",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "skirt",
+    "finnish": "hame",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "dress",
+    "finnish": "mekko",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "suit",
+    "finnish": "puku",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "swimsuit",
+    "finnish": "uimapuku",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "swim trunks / swimming shorts",
+    "finnish": "uimahousut",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "socks",
+    "finnish": "sukat",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "shorts",
+    "finnish": "shortsit",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "shoes",
+    "finnish": "kengät",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "boots",
+    "finnish": "saappaat",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "trainers / sneakers (informal)",
+    "finnish": "lenkkarit",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "trainers / sneakers",
+    "finnish": "lenkkitossut",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "underwear / underclothes",
+    "finnish": "alusvaatteet",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "bra",
+    "finnish": "rintaliivit",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "underpants / underwear",
+    "finnish": "alushousut / alusvaatteet",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "undershirt / vest",
+    "finnish": "aluspaita",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "men's underwear / underwear",
+    "finnish": "kalsarit / alushousut",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "scarf",
+    "finnish": "huivi",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "beanie / knit hat / hat",
+    "finnish": "pipo",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "gloves",
+    "finnish": "käsineet",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "tie",
+    "finnish": "solmio",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "belt",
+    "finnish": "vyö",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "scarf / neckerchief",
+    "finnish": "kaulaliina / huivi",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "umbrella",
+    "finnish": "sateenvarjo",
+    "category": "Vaatteet (Clothing)"
+  },
+  {
+    "english": "red",
+    "finnish": "punainen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "blue",
+    "finnish": "sininen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "green",
+    "finnish": "vihreä",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "yellow",
+    "finnish": "keltainen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "orange",
+    "finnish": "oranssi",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "purple",
+    "finnish": "violetti",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "grey",
+    "finnish": "harmaa",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "white",
+    "finnish": "valkoinen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "brown",
+    "finnish": "ruskea",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "pink / light red",
+    "finnish": "vaaleanpunainen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "beige",
+    "finnish": "beige",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "turquoise",
+    "finnish": "turkoosi",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "golden",
+    "finnish": "kultainen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "silver",
+    "finnish": "hopeanvärinen",
+    "category": "Värit (Colours)"
+  },
+  {
+    "english": "head",
+    "finnish": "pää",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "face",
+    "finnish": "kasvot",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "eyes",
+    "finnish": "silmät",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "ear",
+    "finnish": "korva",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "nose",
+    "finnish": "nenä",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "mouth",
+    "finnish": "suu",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "tooth",
+    "finnish": "hammas",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "tongue / language",
+    "finnish": "kieli",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "neck",
+    "finnish": "kaula",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "shoulder",
+    "finnish": "olkapää",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "arm",
+    "finnish": "käsivarsi",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "elbow",
+    "finnish": "kyynärpää",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "wrist",
+    "finnish": "ranne",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "finger",
+    "finnish": "sormi",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "fingernail",
+    "finnish": "kynsi",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "chest",
+    "finnish": "rintakehä",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "back",
+    "finnish": "selkä",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "stomach / belly",
+    "finnish": "vatsa",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "hip",
+    "finnish": "lantio",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "thigh",
+    "finnish": "reisi",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "knee",
+    "finnish": "polvi",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "shin / lower leg",
+    "finnish": "sääri",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "ankle",
+    "finnish": "nilkka",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "toe",
+    "finnish": "varvas",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "heart",
+    "finnish": "sydän",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "lungs",
+    "finnish": "keuhkot",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "brain",
+    "finnish": "aivot",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "skin",
+    "finnish": "iho",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "blood",
+    "finnish": "veri",
+    "category": "Kehonosat (Body parts)"
+  },
+  {
+    "english": "dog",
+    "finnish": "koira",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "cat",
+    "finnish": "kissa",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "horse",
+    "finnish": "hevonen",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "cow",
+    "finnish": "lehmä",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "pig",
+    "finnish": "sika",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "rabbit",
+    "finnish": "kani",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "bear",
+    "finnish": "karhu",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "moose / elk",
+    "finnish": "hirvi",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "reindeer",
+    "finnish": "poro",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "fox",
+    "finnish": "kettu",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "wolf",
+    "finnish": "susi",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "squirrel",
+    "finnish": "orava",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "hare",
+    "finnish": "jänis",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "salmon",
+    "finnish": "lohi",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "perch",
+    "finnish": "ahven",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "pike",
+    "finnish": "hauki",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "eagle",
+    "finnish": "kotka",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "crow",
+    "finnish": "varis",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "duck",
+    "finnish": "ankka",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "bird",
+    "finnish": "lintu",
+    "category": "Eläimet (Animals)"
+  },
+  {
+    "english": "meat",
+    "finnish": "liha",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "chicken",
+    "finnish": "kana",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "beef",
+    "finnish": "nauta",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "rice",
+    "finnish": "riisi",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "potato",
+    "finnish": "peruna",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "tomato",
+    "finnish": "tomaatti",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "cucumber",
+    "finnish": "kurkku",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "salad / lettuce",
+    "finnish": "salaatti",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "onion",
+    "finnish": "sipuli",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "garlic",
+    "finnish": "valkosipuli",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "bell pepper",
+    "finnish": "paprika",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "carrot",
+    "finnish": "porkkana",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "broccoli",
+    "finnish": "parsakaali",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "cheese",
+    "finnish": "juusto",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "milk",
+    "finnish": "maito",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "cream",
+    "finnish": "kerma",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "yogurt / yoghurt",
+    "finnish": "jogurtti",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "egg / chicken egg",
+    "finnish": "kananmuna",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "butter",
+    "finnish": "voi",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "sugar",
+    "finnish": "sokeri",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "salt",
+    "finnish": "suola",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "pepper",
+    "finnish": "pippuri",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "pasta",
+    "finnish": "pasta",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "soup",
+    "finnish": "keitto",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "bun / sweet roll",
+    "finnish": "pulla",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "cake",
+    "finnish": "kakku",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "juice",
+    "finnish": "mehu",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "water",
+    "finnish": "vesi",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "beer",
+    "finnish": "olut",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "wine",
+    "finnish": "viini",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "tea",
+    "finnish": "tee",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "fizzy drink / soda",
+    "finnish": "limsa",
+    "category": "Ruoka ja juoma (Food and drink)"
+  },
+  {
+    "english": "sad",
+    "finnish": "surullinen",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "angry",
+    "finnish": "vihainen",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "scared / afraid",
+    "finnish": "pelokas",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "excited / enthusiastic",
+    "finnish": "innostunut",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "nervous",
+    "finnish": "hermostunut",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "proud",
+    "finnish": "ylpeä",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "ashamed",
+    "finnish": "häpeissään",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "in love",
+    "finnish": "rakastunut",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "bored",
+    "finnish": "tylsistynyt",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "surprised",
+    "finnish": "yllättynyt",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "disappointed",
+    "finnish": "pettynyt",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "satisfied / content",
+    "finnish": "tyytyväinen",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "worried",
+    "finnish": "huolestunut",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "relieved",
+    "finnish": "helpottunut",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "jealous (romantically)",
+    "finnish": "mustasukkainen",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "envious",
+    "finnish": "kateellinen",
+    "category": "Tunteet (Emotions)"
+  },
+  {
+    "english": "restaurant",
+    "finnish": "ravintola",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "café",
+    "finnish": "kahvila",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "bar",
+    "finnish": "baari",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "library",
+    "finnish": "kirjasto",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "bank",
+    "finnish": "pankki",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "hospital",
+    "finnish": "sairaala",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "hotel",
+    "finnish": "hotelli",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "museum",
+    "finnish": "museo",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "church",
+    "finnish": "kirkko",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "market square",
+    "finnish": "tori",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "railway station",
+    "finnish": "rautatieasema",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "airport",
+    "finnish": "lentokenttä",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "shopping centre / shopping center",
+    "finnish": "kauppakeskus",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "theatre / theater",
+    "finnish": "teatteri",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "cinema / movie theatre",
+    "finnish": "elokuvateatteri",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "post office",
+    "finnish": "posti",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "police station",
+    "finnish": "poliisiasema",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "fire station",
+    "finnish": "paloasema",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "stadium",
+    "finnish": "stadion",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "cemetery",
+    "finnish": "hautausmaa",
+    "category": "Paikat kaupungissa (Places in town)"
+  },
+  {
+    "english": "train",
+    "finnish": "juna",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "taxi",
+    "finnish": "taksi",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "bicycle",
+    "finnish": "polkupyörä",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "ship / ferry",
+    "finnish": "laiva",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "aeroplane / aircraft",
+    "finnish": "lentokone",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "motorbike",
+    "finnish": "moottoripyörä",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "tram",
+    "finnish": "raitiovaunu",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "ambulance",
+    "finnish": "ambulanssi",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "lorry / truck",
+    "finnish": "rekka",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "bridge",
+    "finnish": "silta",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "traffic light",
+    "finnish": "liikennevalo",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "cycle path",
+    "finnish": "pyörätie",
+    "category": "Liikenne (Transport)"
+  },
+  {
+    "english": "sofa / couch",
+    "finnish": "sohva",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "chair",
+    "finnish": "tuoli",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "armchair",
+    "finnish": "nojatuoli",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "table",
+    "finnish": "pöytä",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "dining table / food table",
+    "finnish": "ruokapöytä",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "bed",
+    "finnish": "sänky",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "mattress",
+    "finnish": "patja",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "pillow",
+    "finnish": "tyyny",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "duvet / blanket",
+    "finnish": "peitto",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "lamp",
+    "finnish": "lamppu",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "window",
+    "finnish": "ikkuna",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "door",
+    "finnish": "ovi",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "shelf",
+    "finnish": "hylly",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "cupboard",
+    "finnish": "kaappi",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "wardrobe",
+    "finnish": "vaatekaappi",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "mirror",
+    "finnish": "peili",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "rug / carpet",
+    "finnish": "matto",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "curtain",
+    "finnish": "verho",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "bathtub",
+    "finnish": "kylpyamme",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "toilet / bathroom (informal)",
+    "finnish": "vessa",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "fridge",
+    "finnish": "jääkaappi",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "freezer",
+    "finnish": "pakastin",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "stove / cooker",
+    "finnish": "liesi",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "oven",
+    "finnish": "uuni",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "washing machine",
+    "finnish": "pesukone",
+    "category": "Koti ja huonekalut (Home and furniture)"
+  },
+  {
+    "english": "morning",
+    "finnish": "aamu",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "late morning / forenoon / later morning",
+    "finnish": "aamupäivä",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "midday / noon",
+    "finnish": "keskipäivä",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "afternoon",
+    "finnish": "iltapäivä",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "evening",
+    "finnish": "ilta",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "midnight",
+    "finnish": "keskiyö",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "dawn",
+    "finnish": "aamunkoitto",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "moment",
+    "finnish": "hetki",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "today",
+    "finnish": "tänään",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "tomorrow",
+    "finnish": "huomenna",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "yesterday",
+    "finnish": "eilen",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "the day after tomorrow",
+    "finnish": "ylihuomenna",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "the day before yesterday",
+    "finnish": "toissapäivänä",
+    "category": "Vuorokaudenajat (Time of day)"
+  },
+  {
+    "english": "cottage / cabin",
+    "finnish": "mökki",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "sauna",
+    "finnish": "sauna",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "smoke sauna",
+    "finnish": "savusauna",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "sauna benches",
+    "finnish": "lauteet",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "sauna stove",
+    "finnish": "kiuas",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "steam (in sauna)",
+    "finnish": "löyly",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "birch whisk",
+    "finnish": "vihta",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "ice hole (for winter swimming)",
+    "finnish": "avanto",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "embers",
+    "finnish": "hiilos",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "lake",
+    "finnish": "järvi",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "lake scenery",
+    "finnish": "järvimaisema",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "forest",
+    "finnish": "metsä",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "shore / beach",
+    "finnish": "ranta",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "dock / pier",
+    "finnish": "laituri",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "path / trail",
+    "finnish": "polku",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "campfire",
+    "finnish": "nuotio",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "campfire spot / campfire place",
+    "finnish": "nuotiopaikka",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "campfire pot",
+    "finnish": "nokipannu",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "firewood",
+    "finnish": "polttopuu",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "chimney",
+    "finnish": "savupiippu",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "well",
+    "finnish": "kaivo",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "boat",
+    "finnish": "vene",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "fishing rod",
+    "finnish": "onki",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "starry sky",
+    "finnish": "tähtitaivas",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "sunset",
+    "finnish": "auringonlasku",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "mosquitoes",
+    "finnish": "hyttyset",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "nature",
+    "finnish": "luonto",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to float",
+    "finnish": "kellua",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to dip oneself",
+    "finnish": "kastautua",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to light / to ignite",
+    "finnish": "sytyttää",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "rowing",
+    "finnish": "soutu",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to grill",
+    "finnish": "grillata",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to pick / to gather",
+    "finnish": "poimia",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to fish",
+    "finnish": "kalastaa",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to paddle / to kayak",
+    "finnish": "meloa",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "to shine / to bake / to fry",
+    "finnish": "paistaa",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "lingonberry",
+    "finnish": "puolukka",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "blueberry / bilberry",
+    "finnish": "mustikka",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "mushroom",
+    "finnish": "sieni",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "sausage",
+    "finnish": "makkara",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "stick / skewer",
+    "finnish": "tikku",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  },
+  {
+    "english": "fish soup",
+    "finnish": "kalakeitto",
+    "category": "Mökkisanasto (Cottage vocabulary)"
+  }
+]

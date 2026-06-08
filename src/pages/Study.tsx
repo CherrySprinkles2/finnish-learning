@@ -36,7 +36,7 @@ function ModeHub({ label, category, count }: { label: string; category: string; 
   const cat = encodeURIComponent(category)
   const modes: Mode[] = [
     { label: 'Flashcards', desc: 'Flip cards to review — recognition', icon: '🃏', to: `/flashcards?category=${cat}` },
-    { label: 'Matching', desc: 'Pair Finnish with English against the clock', icon: '🔗', to: `/matching?category=${cat}` },
+    { label: 'Matching', desc: 'Tap to pair Finnish with English', icon: '🔗', to: `/matching?category=${cat}` },
     { label: 'Typed recall', desc: 'Type the translation from memory', icon: '⌨️', to: `/practice?category=${cat}` },
     { label: 'Multiple choice', desc: 'Pick the right translation from four', icon: '✅', to: `/quiz?category=${cat}` },
   ]

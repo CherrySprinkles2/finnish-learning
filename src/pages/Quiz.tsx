@@ -105,6 +105,7 @@ function Game({
   const [index, setIndex] = useState(0)
   const [chosen, setChosen] = useState<number | null>(null)
   const [score, setScore] = useState(0)
+  const [misses, setMisses] = useState<{ q: Question; chosen: number }[]>([]) // wrong answers, for the end-of-quiz review
 
   // One question per word, every word tested once per pass; reshuffled on restart (gen).
   const questions = useMemo(
@@ -126,6 +127,7 @@ function Game({
       if (chosen !== null || !q) return
       setChosen(i)
       if (i === q.correctIndex) setScore(s => s + 1)
+      else setMisses(m => [...m, { q, chosen: i }])
     },
     [chosen, q],
   )
@@ -138,6 +140,7 @@ function Game({
   const restart = useCallback(() => {
     setChosen(null)
     setScore(0)
+    setMisses([])
     setIndex(0)
     setGen(g => g + 1)
   }, [])
@@ -182,6 +185,30 @@ function Game({
             <p className="text-ink-muted mb-8">
               You scored <span className="text-ink font-semibold tabular-nums">{score} / {total}</span> ({pct}%).
             </p>
+
+            {misses.length > 0 && (
+              <div className="text-left mb-8">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-ink-faint mb-3 text-center">
+                  Review your mistakes
+                </h3>
+                <ul className="flex flex-col gap-2">
+                  {misses.map(({ q, chosen }, i) => (
+                    <li key={i} className="bg-inset rounded-lg border border-line-subtle p-3">
+                      <span className={`block font-display font-semibold break-words ${q.direction === 'fi_to_en' ? 'text-warning' : 'text-info'}`}>
+                        {q.prompt}
+                      </span>
+                      <span className="block text-sm text-success mt-1 break-words">
+                        ✓ {q.options[q.correctIndex]}
+                      </span>
+                      <span className="block text-sm text-danger break-words">
+                        ✗ {q.options[chosen]}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={restart}

@@ -8,7 +8,7 @@
 // constants, same windows — so behaviour is unchanged.
 
 import type { Word, PracticeWord, Direction, StoredWord, Attempt, AppData } from '../types'
-import { SEED_WORDS } from '../data/seedWords'
+import SEED_WORDS from '../data/seedWords.json'
 
 const DATA_KEY = 'finnish:data'
 const DATA_VERSION = 1

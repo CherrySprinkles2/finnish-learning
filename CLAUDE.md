@@ -16,7 +16,6 @@ It is single-user-per-browser by design: each browser keeps its own vocabulary i
 ```bash
 npm start            # vite dev server (the only server)
 npm run build        # tsc -b && vite build → dist/
-npm run seed:generate # regenerate src/data/seedWords.ts from initial-translations.md (Kappale 1–6)
 ```
 
 Backups are handled **in the app** (Settings → Export / Import a JSON file), not by an npm script.
@@ -31,8 +30,6 @@ Hosted on **Cloudflare Pages** via the dashboard's Git integration — the same 
 ## Project structure
 
 ```
-scripts/
-  generate-seed-data.ts # parses initial-translations.md (## headers → category) → src/data/seedWords.ts
 src/
   index.css         # Tailwind import + theme tokens (see Theming below)
   types.ts          # Shared interfaces (Word, PracticeWord, Direction, StoredWord, Attempt, AppData)
@@ -52,11 +49,11 @@ src/
     Words.tsx       # Vocabulary management, grouped by category (edit / delete / stats); each category card has a "Study →" button → Study hub and an eye toggle to hide it from Practice + Progress (see Disabling categories). Adding words lives on a separate page via the "+ Add vocabulary" button
     AddWords.tsx    # Add Vocabulary page (/words/add): AI bulk flow (paste English list → generateVocabulary → editable review table with duplicate flagging → addWords) plus a manual single-add form. Reached from the Vocabulary page button
     Study.tsx       # Per-category study hub: picks an exercise mode (Flashcards / Matching / Typed recall / Multiple choice). Reached as /study?category=<name>; /study with no category redirects to Words
-    Flashcards.tsx  # Per-category flashcard deck (flip / shuffle / direction toggle); study-only. Launched from the Study hub; /flashcards with no category redirects to Words
+    Flashcards.tsx  # Per-category flashcard deck: flip + direction toggle, with a self-sorting session ("Got it" clears a card / "Still learning" re-queues it) ending in a completion screen (first-try count + "review the tricky ones"); study-only. Launched from the Study hub; /flashcards with no category redirects to Words
     Matching.tsx    # Per-category matching game (tap Finnish ↔ English, rounds of 6); study-only. Launched from the Study hub
     Progress.tsx    # Stats dashboard (daily activity/accuracy, struggling/known-well words, per-category accuracy) — recharts; reads store.getStats()
     Grammar.tsx     # Grammar reference (Kappale 1–5) — see src/data/grammar.ts
-    Quiz.tsx        # Per-category multiple-choice game (pick the right translation from four; distractors from the same category). Study-only. Launched from the Study hub as /quiz?category=
+    Quiz.tsx        # Per-category multiple-choice game (pick the right translation from four; distractors from the same category); completion screen reviews any missed words (correct vs. your pick). Study-only. Launched from the Study hub as /quiz?category=
   components/
     NavBar.tsx      # Sticky top nav shared across all pages
     BackupReminder.tsx # Dismissible "you have un-backed-up changes" banner (see Data durability)
@@ -64,7 +61,7 @@ src/
     grammar/        # Grammar block components (ProseBlock, GrammarTable, ExerciseBlock, …)
   data/
     grammar.ts      # Static grammar content (typed chapter/section/block tree)
-    seedWords.ts    # AUTO-GENERATED Kappale 1–6 starter words (npm run seed:generate); seeded on first run
+    seedWords.json  # Hand-edited starter words ([{ english, finnish, category }]); imported by store.ts and seeded on first run
 ```
 
 ## Theming
@@ -100,7 +97,7 @@ All data lives in `localStorage` and is read/written through `store.ts` — the 
 - `finnish:onboarded` → `"1"` once the first-run gate is dismissed.
 - `finnish:lastModified` / `finnish:lastBackup` → epoch-ms timestamps driving the backup reminder (see Data durability).
 
-**Seeding:** on first run (`finnish:data` absent), the store seeds the Kappale 1–6 starter words from `src/data/seedWords.ts`. A deliberate clear to an empty list keeps the key present, so it never silently re-seeds.
+**Seeding:** on first run (`finnish:data` absent), the store seeds the starter words from `src/data/seedWords.json`. A deliberate clear to an empty list keeps the key present, so it never silently re-seeds.
 
 **Functions:**
 
@@ -147,10 +144,10 @@ Flow: **Vocabulary → "Study →" → Study hub (`/study?category=<name>`) → 
 
 | Mode | Route | Notes |
 |------|-------|-------|
-| Flashcards | `/flashcards?category=` | Flip/shuffle/direction-toggle deck (`Flashcards.tsx`). Study-only. |
+| Flashcards | `/flashcards?category=` | Flip + direction-toggle deck run as a self-sorting session: flip, then "Got it" (→ / ArrowRight) clears the card or "Still learning" (← / ArrowLeft) re-queues it; progress bar + "N to go", ending in a completion screen (first-try count, "review the tricky ones", "shuffle all again"). Study-only (`Flashcards.tsx`). |
 | Matching | `/matching?category=` | Tap-to-pair Finnish ↔ English in rounds of `ROUND_SIZE` (6); progress bar + mistake count (`Matching.tsx`). Study-only. |
 | Typed recall | `/practice?category=` | Reuses `Practice.tsx`, which seeds its category filter from the `?category=` param. Records attempts. |
-| Multiple choice | `/quiz?category=` | Pick the right translation from four; distractors drawn from the same category (topped up from the global pool when the category is small). Random direction per question; keys 1–4 select, Enter advances. Study-only (`Quiz.tsx`). |
+| Multiple choice | `/quiz?category=` | Pick the right translation from four; distractors drawn from the same category (topped up from the global pool when the category is small). Random direction per question; keys 1–4 select, Enter advances. Completion screen reviews any missed words (correct answer vs. your pick). Study-only (`Quiz.tsx`). |
 
 Conventions shared by the study pages: `?category=` is the contract (`null` = no selection → redirect to Vocabulary; `''` = Uncategorised; otherwise the exact category name). Tiles/cards display only the **first ` / ` variant** of a word to stay compact. Matching and Flashcards are **study-only** (no `recordAttempt` writes), so they don't affect Progress stats or practice weighting; only Typed recall records attempts. Back-links from a deck/game return to that category's hub (`/study?category=`).
 
@@ -188,14 +185,14 @@ ACCURACY_UNSEEN = 3     // score for a word never attempted
 
 - Words are stored in their **nominative (base) form** — e.g. "espanja" not "espanjaa", "koira" not "koiraa"
 - Multiple valid translations are separated by ` / ` in the english and finnish fields
-- The initial word list comes from `initial-translations.md` (Kappale 1–6 plus themed sets)
+- The initial word list lives in `src/data/seedWords.json` (Kappale 1–6 plus themed sets)
 
 ## Categories (grouping)
 
-- Each `## Section` header in `initial-translations.md` becomes the `category` for the rows beneath it. The markdown is the source of truth for the **starter set only**: `npm run seed:generate` regenerates `src/data/seedWords.ts`, which is seeded into a browser **once** on first run.
+- The starter set lives in `src/data/seedWords.json` (a flat `[{ english, finnish, category }]` list; blank `category` = Uncategorised). It is the source of truth for the **starter set only** and is seeded into a browser **once** on first run. Edit the JSON directly to change it; category order follows array order.
 - After first run the user's `localStorage` is authoritative — there is no re-seed, so manual edits/categories in the UI persist and are never overwritten.
 - The Vocabulary page groups words into collapsible category cards; the Study hub, its exercise modes, and the Practice category filter all build their lists from these categories.
-- To add words to an existing browser: add them via the Vocabulary UI (any category, including a new one). To change the bundled starter set new users get: edit the markdown and run `npm run seed:generate`.
+- To add words to an existing browser: add them via the Vocabulary UI (any category, including a new one). To change the bundled starter set new users get: edit `src/data/seedWords.json` directly.
 
 ## Disabling categories
 
@@ -215,7 +212,7 @@ The **Add Vocabulary page** (`AddWords.tsx`, `/words/add`) is the entry point fo
 ## Planned features (not yet built)
 
 - Grammar reference Kappale 7–9 (data structure in place; fill `src/data/grammar.ts` as that vocabulary is added)
-- Vocabulary expansion — the user will ask Claude to add themed word sets, either into the bundled starter set (markdown → `npm run seed:generate`) or directly via the Vocabulary UI
+- Vocabulary expansion — the user will ask Claude to add themed word sets, either into the bundled starter set (`src/data/seedWords.json`) or directly via the Vocabulary UI
 
 ## What NOT to do
 
